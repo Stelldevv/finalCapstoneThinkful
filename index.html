@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Moovit!</title>
+    <meta name="description" content="A cool capstone project!">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type='text/css' href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="data.js"></script>
+    <script src="client.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>
+        Moovit(name change pending)
+      </h1>
+      <p id="slogan">Getting you there since 2018!</p>
+    </header>
+    <main>
+
+      <!-- The Signup page begins here -->
+      <section id="signupPage">
+        <form id="signupForm">
+          <label for="userField"></label>
+          <input id="userField" class='input' type="text" name="userField" placeholder="Username"> <br>
+          <label for="emailField"></label>
+          <input id="emailField" class="input" type="email" name="emailField" placeholder="Email"> <br>
+          <label for="passField"></label>
+          <input id="passField" class="input" type="password" name="passField" placeholder="Password"> <br>
+          <label for="confirmPassField"></label>
+          <input id="confirmPassField" class="input" type="password" name="confirmPassField" placeholder="Confirm Password"> <br>
+          <button type="button" id="signupButton">Submit</button>
+        </form>
+      </section>
+      <!-- The Signup page ends here -->
+
+      <!-- The Signup Success page begins here -->
+      <section id="signupSuccessPage">
+        <p id="successText">You have successfully signed up for Moovit! <br> </p>
+        
+        <p>Follow the link sent to <span id="signupSuccessEmail">[ERROR: EMAIL NOT FOUND]</span> to begin.</p>
+        <button type="submit" id="returnToLogin">Back to Login</button>
+      </section>
+      <!-- The Signup Success page ends here -->
+
+      <!-- The Login page begins here -->
+      <section id="loginPage">
+        <form id="loginForm">
+          <label for="userField"></label>
+          <input id="userField" class='input' type="text" name="userField" placeholder="Email or Username"> <br>
+          <label for="passField"></label>
+          <input id="passField" class="input" type="password" name="passField" placeholder="Password"> <br>
+          <button type="submit" id="login">Login</button>
+          <br>
+          <button type="submit" id="register">Sign up</button>
+        </form>
+      </section>
+      <!-- The Login page ends here -->
+
+      <!-- The Setup interface begins here -->
+      <section id="setupPage">
+        <form id="questionForm">
+          <p id="questionText"> Are you doing a moving thing? </p>
+          <p id="questionSubText"> Moovit will help you with a moving thing by doing a robot thing.</p>
+          <button type="button" class="button yesButton" >Yes!</button>
+          <button type="button" class="button noButton" >No.</button>
+        </form>
+      </section>
+      <!-- The Setup interface ends here -->
+
+      <!-- The Setup Confirmation interface begins here -->
+      <section id="setupConfirmPage">
+        <form id="questionForm">
+          <p id="questionText"> Does the list below accurately describe your goals? </p>
+          <p id="confirmList"> <ul></ul> </p>
+          <button type="button" class="button confirmButton" >Yup!</button>
+          <button type="button" class="button retryButton" >Nope! (Try Again)</button>
+        </form>
+      </section>
+      <!-- The Setup Confirmation interface ends here -->
+
+      <!-- The List page begins here -->
+      <section id="listPage">
+        <ul id="moveList">
+        </ul>
+      </section>
+      <!-- The List page ends here -->
+
+      <!-- API Action page begins here -->
+
+
+
+      <!-- API Action page ends here -->
+
+    </main>
+    <footer>
+      <p>Have a question? Just want to chat? <br>
+      Message me at <a href="mailto:stelldevv@gmail.com">
+      stelldevv@gmail.com</a>!</p>
+    </footer>
+  </body>
+</html>
