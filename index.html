@@ -19,18 +19,36 @@
       <p id="slogan">Getting you there since 2018!</p>
     </header>
     <main>
+      <!-- The Disclaimer page begins here -->
+      <section id="disclaimerPage">
+        <form id="disclaimerForm">
+          <p id="disclaimerText"> Moovit Disclaimer </p>
+          <p id="disclaimerSubText"> This application uses location information to provide functionality. None of the data that you provide will be used for anything other than serving you here. I, Joshua Stelly, on pain of eternal shame and syntax errors, promise to guard your information. <br> <br>
+            
+          By clicking "Accept", you agree to the above and will be directed to the login screen. <br> <br>
+            
+          By clicking "Decline", you will be directed to the waiting room while you reconsider your decision. </p>
+          <button type="button" id="accept" class="button">Accept</button>
+          <button type="button" id="decline" class="button">Decline</button>
+        </form>
+      </section>
+      <section id="waitingRoom">
+        <script src="https://cdn.htmlgames.com/embed.js?game=ClassicPac&amp;width=400&amp;height=240&amp;bgcolor=black"></script>
+        <button type="button" class='button' id="leaveWaiting" class="button">Return to Disclaimer</button>
+      </section>
+      <!-- The Disclaimer page ends here -->
 
       <!-- The Signup page begins here -->
       <section id="signupPage">
         <form id="signupForm">
           <label for="userField"></label>
-          <input id="userField" class='input' type="text" name="userField" placeholder="Username"> <br>
+          <input id="userField" class='input' type="text" name="userField" placeholder="Username" required> <br>
           <label for="emailField"></label>
-          <input id="emailField" class="input" type="email" name="emailField" placeholder="Email"> <br>
+          <input id="emailField" class="input" type="email" name="emailField" placeholder="Email" required> <br>
           <label for="passField"></label>
-          <input id="passField" class="input" type="password" name="passField" placeholder="Password"> <br>
+          <input id="passField" class="input" type="password" name="passField" placeholder="Password" required> <br>
           <label for="confirmPassField"></label>
-          <input id="confirmPassField" class="input" type="password" name="confirmPassField" placeholder="Confirm Password"> <br>
+          <input id="confirmPassField" class="input" type="password" name="confirmPassField" placeholder="Confirm Password" required> <br>
           <button type="button" id="signupButton">Submit</button>
         </form>
       </section>
@@ -38,9 +56,9 @@
 
       <!-- The Signup Success page begins here -->
       <section id="signupSuccessPage">
-        <p id="successText">You have successfully signed up for Moovit! <br> </p>
+        <p id="successText">You have successfully signed up for Moovit. <br> </p>
         
-        <p>Follow the link sent to <span id="signupSuccessEmail">[ERROR: EMAIL NOT FOUND]</span> to begin.</p>
+        <p>Follow the link sent to <span id="signupSuccessEmail">[ERROR: EMAIL NOT FOUND]</span> to confirm your account.</p>
         <button type="submit" id="returnToLogin">Back to Login</button>
       </section>
       <!-- The Signup Success page ends here -->
@@ -60,6 +78,17 @@
       <!-- The Login page ends here -->
 
       <!-- The Setup interface begins here -->
+      <section id="locationPage">
+        <form id="locationForm">
+          <label for="locationField">Where are you currently located?</label> <br>
+          <input id="locationField" class='input' type="text" name="locationField" placeholder="IE San Diego, CA"> <br>
+          <label for="destinationField">Where are you moving to?</label> <br>
+          <input id="destinationField" class="input" type="text" name="destinationField" placeholder="IE Austin, TX"> <br>
+          <button type="button" class="button" id="beginQuestions">Next</button>
+          <br>
+        </form>
+      </section>
+
       <section id="setupPage">
         <form id="questionForm">
           <p id="questionText"> Are you doing a moving thing? </p>
@@ -74,6 +103,7 @@
       <section id="setupConfirmPage">
         <form id="questionForm">
           <p id="questionText"> Does the list below accurately describe your goals? </p>
+          <p id="tripText">Travelling from <span class="fromCity"></span> to <span class="toCity"></span>.</p>
           <p id="confirmList"> <ul></ul> </p>
           <button type="button" class="button confirmButton" >Yup!</button>
           <button type="button" class="button retryButton" >Nope! (Try Again)</button>
@@ -83,6 +113,7 @@
 
       <!-- The List page begins here -->
       <section id="listPage">
+        <p class="tripText"><span class="fromCity"></span> to <span class="toCity"></span></p>
         <ul id="moveList">
         </ul>
       </section>
