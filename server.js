@@ -34,9 +34,9 @@ function callback(error, response, body) {
   }
 }
  
-request(options, callback) {
-	console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-};
+//request(options, callback) {
+	//console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+//};
 
 
 
