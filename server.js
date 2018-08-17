@@ -12,9 +12,14 @@ mongoose.Promise = global.Promise;
 const { PORT, DATABASE_URL } = require("./config");
 
 const app = express();
-app.use(express.json());
 
+app.use(express.json());
 app.use(express.static('public'));
+
+app.get("/dev", (req, res) => {
+  console.log('starting dev window');
+  res.json({count: theCount});
+});
 
 // catch-all endpoint if client makes request to non-existent endpoint
 app.use("*", function(req, res) {
@@ -70,3 +75,6 @@ function closeServer() {
 if (require.main === module) {
   runServer(DATABASE_URL).catch(err => console.error(err));
 }
+
+app.listen(process.env.PORT || 8080 ||, () => console.log(
+  `Your app is listening on port ${process.env.PORT || 8080}`));
