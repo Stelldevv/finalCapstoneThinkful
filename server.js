@@ -18,7 +18,6 @@ app.use(express.static('public'));
 
 app.get("/dev", (req, res) => {
   console.log('starting dev window');
-  res.json({count: theCount});
 });
 
 // catch-all endpoint if client makes request to non-existent endpoint
@@ -75,6 +74,3 @@ function closeServer() {
 if (require.main === module) {
   runServer(DATABASE_URL).catch(err => console.error(err));
 }
-
-app.listen(process.env.PORT || 8080 ||, () => console.log(
-  `Your app is listening on port ${process.env.PORT || 8080}`));
