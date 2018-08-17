@@ -1,14 +1,23 @@
-'use strict';
+"use strict";
 
-const express = require('express');
-const morgan = require('morgan');
-const mongoose = require('mongoose');
+const express = require("express");
+const mongoose = require("mongoose");
+
+// Mongoose internally uses a promise-like object,
+// but its better to make Mongoose use built in es6 promises
 mongoose.Promise = global.Promise;
 
-const app = express();
+// config.js is where we control constants for entire
+// app like PORT and DATABASE_URL
+const { PORT, DATABASE_URL } = require("./config");
 
-app.use(morgan('common'));
+const app = express();
 app.use(express.json());
+
+// catch-all endpoint if client makes request to non-existent endpoint
+app.use("*", function(req, res) {
+  res.status(404).json({ message: "Not Found" });
+});
 
 // closeServer needs access to a server object, but that only
 // gets created when `runServer` runs, so we declare `server` here
@@ -18,19 +27,23 @@ let server;
 // this function connects to our database, then starts the server
 function runServer(databaseUrl, port = PORT) {
   return new Promise((resolve, reject) => {
-    mongoose.connect(databaseUrl, err => {
-      if (err) {
-        return reject(err);
+    mongoose.connect(
+      databaseUrl,
+      err => {
+        if (err) {
+          return reject(err);
+        }
+        server = app
+          .listen(port, () => {
+            console.log(`Your app is listening on port ${port}`);
+            resolve();
+          })
+          .on("error", err => {
+            mongoose.disconnect();
+            reject(err);
+          });
       }
-      server = app.listen(port, () => {
-        console.log(`Your app is listening on port ${port}`);
-        resolve();
-      })
-        .on('error', err => {
-          mongoose.disconnect();
-          reject(err);
-        });
-    });
+    );
   });
 }
 
@@ -39,7 +52,7 @@ function runServer(databaseUrl, port = PORT) {
 function closeServer() {
   return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
-      console.log('Closing server');
+      console.log("Closing server");
       server.close(err => {
         if (err) {
           return reject(err);
@@ -55,3 +68,5 @@ function closeServer() {
 if (require.main === module) {
   runServer(DATABASE_URL).catch(err => console.error(err));
 }
+
+module.exports = { app, runServer, closeServer };
