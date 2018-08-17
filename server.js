@@ -14,6 +14,8 @@ const { PORT, DATABASE_URL } = require("./config");
 const app = express();
 app.use(express.json());
 
+app.use(express.static('public'));
+
 // catch-all endpoint if client makes request to non-existent endpoint
 app.use("*", function(req, res) {
   res.status(404).json({ message: "Not Found" });
