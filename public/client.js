@@ -1,7 +1,7 @@
 var list = [];
 var fromCity;
 var toCity;
-var chosenCity = 'Austin';
+var chosenCity;
 var userData;
 var emailData;
 var passwordData;
@@ -115,6 +115,7 @@ function listMaker () {
   } 
 
 function createList () {
+  chosenCity = fromCity;
   $('#setupPage').css('display', 'none');
   $('#setupConfirmPage').css('display', 'block');
   list.map(function (item) {
@@ -127,7 +128,16 @@ function createList () {
         $('#moveList').append('<section class="itemContainer"><li>' + item + '<div class="checkBox"></div>' + '</li>' + '<section class="itemContent"><a href="https://travel.state.gov/content/travel/en/international-travel/before-you-go/travelers-checklist.html" target="_blank">' + 'Visit travel.state.gov' + '</a></section></section>');
 
       } else if (item == 'Find a Storage Unit') {
-        $('#moveList').append('<section class="itemContainer"><li>' + item + '<div class="checkBox"></div>' + '</li>' + '<section class="itemContent"><iframe width="150" height="150" frameborder="1" style="border:2" src="https://www.google.com/maps/embed/v1/place?q=storage%20unit%20' + chosenCity + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s"></iframe></section></section>');
+        $('#moveList').append('<section class="itemContainer"><li>' + item + '<div class="checkBox"></div>' + '</li>' + '<section class="itemContent"><iframe width="150" height="150" frameborder="1" style="border:2" src="https://www.google.com/maps/embed/v1/place?q=storage+unit+' + chosenCity + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s"></iframe></section></section>');
+
+      } else if (item == 'Hire Movers') {
+        $('#moveList').append('<section class="itemContainer"><li>' + item + '<div class="checkBox"></div>' + '</li>' + '<section class="itemContent"><iframe width="150" height="150" frameborder="1" style="border:2" src="https://www.google.com/maps/embed/v1/place?q=movers+' + chosenCity + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s"></iframe></section></section>');
+
+      } else if (item == 'Rent a Moving Truck') {
+        $('#moveList').append('<section class="itemContainer"><li>' + item + '<div class="checkBox"></div>' + '</li>' + '<section class="itemContent"><iframe width="150" height="150" frameborder="1" style="border:2" src="https://www.google.com/maps/embed/v1/place?q=moving+truck+rental+' + chosenCity + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s"></iframe></section></section>');
+
+      } else if (item == 'Ship your Vehicle') {
+        $('#moveList').append('<section class="itemContainer"><li>' + item + '<div class="checkBox"></div>' + '</li>' + '<section class="itemContent"><iframe width="150" height="150" frameborder="1" style="border:2" src="https://www.google.com/maps/embed/v1/place?q=auto+transport+' + chosenCity + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s"></iframe></section></section>');
 
       } else {
         $('#moveList').append('<section class="itemContainer"><li>' + item + '<div class="checkBox"></div>' + '</li></section>');
@@ -154,6 +164,9 @@ function createList () {
 function moveList() {
   $('#moveList').on('click', '.itemContainer', function (event) {
     $('.itemContent').toggle();
+  });
+  $('#moveList').on('click', '.checkBox', function (event) {
+    $('.itemContainer').toggleClass("checked");
   });
 }
 

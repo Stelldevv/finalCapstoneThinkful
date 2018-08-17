@@ -340,6 +340,7 @@ h1 {
 
 .checked {
   background-color: grey !important;
+  text-decoration: line-through;
 }
 
 /* -------------------- LIST SECTION--------------------*/
