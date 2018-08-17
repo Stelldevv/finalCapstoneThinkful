@@ -163,7 +163,8 @@ function createList () {
 
 function moveList() {
   $('#moveList').on('click', '.itemContainer', function (event) {
-    $('.itemContent').toggle();
+    //$(this).toggle();
+    $(this).find('.itemContent').toggle();
   });
   $('#moveList').on('click', '.checkBox', function (event) {
     $('.itemContainer').toggleClass("checked");
