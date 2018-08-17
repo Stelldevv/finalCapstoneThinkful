@@ -2,6 +2,13 @@
 
 const express = require("express");
 const mongoose = require("mongoose");
+var request = require('request');
+var options = {
+  url: 'https://api.yelp.com/v3/businesses/search?term=storage+unit&location=san%20diego&start=0&sortby=review_count',
+  headers: {
+    'Authorization': 'Bearer gxzAI1gpNgnHmS-yFroH633b3LmnU31Uxe8xDxMuxIpM5O9E16zEC1EIUwGD-IAQF1UhI223FGhtixLsiBIUMsNNaTgoczcaRZu9LJ6EEZZYsc1Mpwoafp4dmxB2W3Yx'
+  }
+};
 
 // Mongoose internally uses a promise-like object,
 // but its better to make Mongoose use built in es6 promises
@@ -16,14 +23,22 @@ const app = express();
 app.use(express.json());
 app.use(express.static('public'));
 
-app.get("/dev", (req, res) => {
-  console.log('starting dev window');
-});
-
 // catch-all endpoint if client makes request to non-existent endpoint
 app.use("*", function(req, res) {
   res.status(404).json({ message: "Not Found" });
 });
+ 
+function callback(error, response, body) {
+  if (!error && response.statusCode == 200) {
+    var info = JSON.parse(body);
+  }
+}
+ 
+request(options, callback) {
+	console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+};
+
+
 
 // closeServer needs access to a server object, but that only
 // gets created when `runServer` runs, so we declare `server` here

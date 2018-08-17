@@ -31,7 +31,7 @@ let state = {
       task: [ "Ship your Vehicle" ]
     },
     {
-      question: "Would you like to rent a storage unit at your location or destination?",
+      question: "Would you like to rent a storage unit before you move?",
       subtext: "Moovit can provide you with reasonable price estimates and leads for businesses in the area.",
       task: [ "Find a Storage Unit" ]
     },
