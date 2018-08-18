@@ -4,7 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 var request = require('request');
 var options = {
-  url: 'https://api.yelp.com/v3/businesses/search?term=storage+unit&location=san%20diego&start=0&sortby=review_count',
+  url: 'https://api.yelp.com/v3/businesses/search?term=storage+unit&{location}&start=0&sortby=review_count',
   headers: {
     'Authorization': 'Bearer gxzAI1gpNgnHmS-yFroH633b3LmnU31Uxe8xDxMuxIpM5O9E16zEC1EIUwGD-IAQF1UhI223FGhtixLsiBIUMsNNaTgoczcaRZu9LJ6EEZZYsc1Mpwoafp4dmxB2W3Yx'
   }
@@ -23,20 +23,12 @@ const app = express();
 app.use(express.json());
 app.use(express.static('public'));
 
-// catch-all endpoint if client makes request to non-existent endpoint
-app.use("*", function(req, res) {
-  res.status(404).json({ message: "Not Found" });
-});
- 
 function callback(error, response, body) {
   if (!error && response.statusCode == 200) {
     var info = JSON.parse(body);
+    return info.businesses[0];
   }
 }
- 
-//request(options, callback) {
-	//console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-//};
 
 app.get('/users', (req, res) => {
   User
@@ -55,6 +47,13 @@ app.get('/users', (req, res) => {
       res.status(500).json({ error: 'something went terribly wrong' });
     });
 });
+
+app.get('/yelp/:city', (req, res) => {
+	let city = "location=".concat(req.params.city);
+	options.url = options.url.replace("{location}", city);
+	let locationData = request(options, callback);
+	res.status(200).json(locationData);
+})
 
 
 app.post('/users', (req, res) => {
@@ -174,7 +173,7 @@ function runServer(databaseUrl, port = PORT) {
           .on("error", err => {
             mongoose.disconnect();
             reject(err);
-          });
+        });
       }
     );
   });
@@ -201,3 +200,4 @@ function closeServer() {
 if (require.main === module) {
   runServer(DATABASE_URL).catch(err => console.error(err));
 }
+
