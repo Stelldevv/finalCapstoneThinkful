@@ -116,8 +116,8 @@ function listMaker () {
 
 function createList () {
   let settings = {
-    url: "/yelp/" + fromCity;
-    method: get;
+    url: "/yelp/" + fromCity,
+    method: get,
   }
   $('#setupPage').css('display', 'none');
   $('#setupConfirmPage').css('display', 'block');
@@ -170,7 +170,7 @@ function moveList() {
     $(this).find('.itemContent').toggle();
   });
   $('#moveList').on('click', '.checkBox', function (event) {
-    $('.itemContainer').toggleClass("checked");
+    $(this).find('.itemContainer').toggleClass("checked");
   });
 }
 
