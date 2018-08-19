@@ -17,7 +17,7 @@ mongoose.Promise = global.Promise;
 // config.js is where we control constants for entire
 // app like PORT and DATABASE_URL
 const { PORT, DATABASE_URL } = require("./config");
-
+var city = require("./client");
 const app = express();
 
 app.use(express.json());
@@ -49,7 +49,7 @@ app.get('/users', (req, res) => {
 });
 
 app.get('/yelp/:city', (req, res) => {
-	let city = "location=".concat(req.params.city);
+	//let city = "location=".concat(req.params.city);
 	options.url = options.url.replace("{location}", city);
 	let locationData = request(options, callback);
 	res.status(200).json(locationData);

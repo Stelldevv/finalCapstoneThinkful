@@ -115,7 +115,10 @@ function listMaker () {
   } 
 
 function createList () {
-  chosenCity = fromCity;
+  let settings = {
+    url: "/yelp/" + fromCity;
+    method: get;
+  }
   $('#setupPage').css('display', 'none');
   $('#setupConfirmPage').css('display', 'block');
   list.map(function (item) {
