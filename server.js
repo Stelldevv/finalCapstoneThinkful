@@ -4,7 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 var request = require('request');
 var options = {
-  url: 'https://api.yelp.com/v3/businesses/search?term=storage+unit&{location}&start=0&sortby=review_count',
+  url: 'https://api.yelp.com/v3/businesses/search?{service}&{location}&start=0&sortby=review_count',
   headers: {
     'Authorization': 'Bearer gxzAI1gpNgnHmS-yFroH633b3LmnU31Uxe8xDxMuxIpM5O9E16zEC1EIUwGD-IAQF1UhI223FGhtixLsiBIUMsNNaTgoczcaRZu9LJ6EEZZYsc1Mpwoafp4dmxB2W3Yx'
   }
@@ -25,7 +25,9 @@ app.use(express.static('public'));
 function callback(error, response, body) {
   if (!error && response.statusCode == 200) {
     var info = JSON.parse(body);
-    return info.businesses[0];
+    var yelpReturn = info.businesses[0];
+    console.log(yelpReturn);
+    return yelpReturn;
   }
 }
 
@@ -47,11 +49,17 @@ app.get('/users', (req, res) => {
     });
 });
 
-app.get('/yelp/:city', (req, res) => {
+app.get('/yelp/:city/:service', (req, res) => {
 	let city = "location=".concat(req.params.city);
+	let service = "term=".concat(req.params.service);
 	options.url = options.url.replace("{location}", city);
-	let locationData = request(options, callback);
-	res.status(200).json(locationData);
+	options.url = options.url.replace("{service}", service);
+	request.get(options, (error, body, response) => {
+	res.status(200).json(JSON.parse(body.body).businesses[0].name);
+	})
+
+	//request.get('http://some.server.com/').auth(null, null, true, 'bearerToken'); // or request.get('http://some.server.com/', { 'auth': { 'bearer': 'bearerToken' } });
+
 })
 
 

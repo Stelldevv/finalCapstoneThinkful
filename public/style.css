@@ -330,17 +330,18 @@ h1 {
 }
 
 .checkBox {
-  display: inline-flex;
-  position: relative;
-  left: 50px;
-  border: 2px solid black;
-  height: 16px;
-  width: 16px;
+ float: right;
+ position: relative;
+ left: 40px;
 }
 
 .checked {
   background-color: grey !important;
   text-decoration: line-through;
+}
+
+.yelpResult {
+  border: 2px dotted red;
 }
 
 /* -------------------- LIST SECTION--------------------*/

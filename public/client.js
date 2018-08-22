@@ -1,11 +1,26 @@
 var list = [];
 var fromCity;
+var city = fromCity;
 var toCity;
-var chosenCity;
+var service;
 var userData;
 var emailData;
 var passwordData;
+var query;
+const YELP_SEARCH_URL = 'localhost:8080/yelp/';
 
+function getDataFromApi(city, service, callback) {
+  const query = {
+    q: `${city}` + '/' + `${service}` + '/'
+  };
+  $.getJSON(YELP_SEARCH_URL, query, callback);
+}
+
+function displayYelpResult(data) {
+  const result = data.info.businesses[0].name;
+  $('.yelpResult').text(result);
+  console.log (result);
+}
 
 function disclaimer () {
   $('#disclaimerPage').on('click', '#accept', function (event) {
@@ -127,16 +142,18 @@ function createList () {
         $('#moveList').append('<section class="itemContainer"><li>' + item + '<input type="checkbox" class="checkBox"></input>' + '</li>' + '<section class="itemContent"><a href="https://travel.state.gov/content/travel/en/international-travel/before-you-go/travelers-checklist.html" target="_blank">' + 'Visit travel.state.gov' + '</a></section></section>');
 
       } else if (item == 'Find a Storage Unit') {
-        $('#moveList').append('<section class="itemContainer"><li>' + item + '<input type="checkbox" class="checkBox"></input>' + '</li>' + '<section class="itemContent"><iframe width="150" height="150" frameborder="1" style="border:2" src="https://www.google.com/maps/embed/v1/place?q=storage+unit+' + chosenCity + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s"></iframe></section></section>');
+        service = 'storage unit';
+        getDataFromApi(query, displayYelpResult);
+        $('#moveList').append('<section class="itemContainer"><li>' + item + '<input type="checkbox" class="checkBox"></input>' + '</li>' + '<section class="itemContent"><section class="yelpResult"></section><iframe width="150" height="150" frameborder="1" style="border:2" src="https://www.google.com/maps/embed/v1/place?q=storage+unit+' + fromCity + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s"></iframe></section></section>');
 
       } else if (item == 'Hire Movers') {
-        $('#moveList').append('<section class="itemContainer"><li>' + item + '<input type="checkbox" class="checkBox"></input>' + '</li>' + '<section class="itemContent"><iframe width="150" height="150" frameborder="1" style="border:2" src="https://www.google.com/maps/embed/v1/place?q=movers+' + chosenCity + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s"></iframe></section></section>');
+        $('#moveList').append('<section class="itemContainer"><li>' + item + '<input type="checkbox" class="checkBox"></input>' + '</li>' + '<section class="itemContent"><iframe width="150" height="150" frameborder="1" style="border:2" src="https://www.google.com/maps/embed/v1/place?q=movers+' + fromCity + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s"></iframe></section></section>');
 
       } else if (item == 'Rent a Moving Truck') {
-        $('#moveList').append('<section class="itemContainer"><li>' + item + '<input type="checkbox" class="checkBox"></input>' + '</li>' + '<section class="itemContent"><iframe width="150" height="150" frameborder="1" style="border:2" src="https://www.google.com/maps/embed/v1/place?q=moving+truck+rental+' + chosenCity + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s"></iframe></section></section>');
+        $('#moveList').append('<section class="itemContainer"><li>' + item + '<input type="checkbox" class="checkBox"></input>' + '</li>' + '<section class="itemContent"><iframe width="150" height="150" frameborder="1" style="border:2" src="https://www.google.com/maps/embed/v1/place?q=moving+truck+rental+' + fromCity + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s"></iframe></section></section>');
 
       } else if (item == 'Ship your Vehicle') {
-        $('#moveList').append('<section class="itemContainer"><li>' + item + '<input type="checkbox" class="checkBox"></input>' + '</li>' + '<section class="itemContent"><iframe width="150" height="150" frameborder="1" style="border:2" src="https://www.google.com/maps/embed/v1/place?q=auto+transport+' + chosenCity + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s"></iframe></section></section>');
+        $('#moveList').append('<section class="itemContainer"><li>' + item + '<input type="checkbox" class="checkBox"></input>' + '</li>' + '<section class="itemContent"><iframe width="150" height="150" frameborder="1" style="border:2" src="https://www.google.com/maps/embed/v1/place?q=auto+transport+' + fromCity + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s"></iframe></section></section>');
 
       } else {
         $('#moveList').append('<section class="itemContainer"><li>' + item + '<input type="checkbox" class="checkBox"></input>' + '</li></section>');
