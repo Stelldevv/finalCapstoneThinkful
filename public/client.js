@@ -7,7 +7,7 @@ var userData;
 var emailData;
 var passwordData;
 var query;
-const YELP_SEARCH_URL = 'localhost:8080/yelp/';
+const YELP_SEARCH_URL = 'https://calm-hollows-72370.herokuapp.com/yelp/';
 
 function getDataFromApi(city, service, callback) {
   const query = {
