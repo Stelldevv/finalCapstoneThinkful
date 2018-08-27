@@ -113,8 +113,100 @@ button {
 }
 /* ---------------- BUTTON RESET ---------------- */
 
+html { 
+  background: url(images/openRoad.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* -------------------- NAVBAR SECTION --------------------*/
+#navBar {
+  margin-bottom: 30px;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  list-style-type: none;
+}
+
+#navBar > li {
+  float: left;
+  text-decoration: none;
+}
+
+#navBar > li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+#navBar > li a:hover {
+    background-color: #111;
+}
+
+#userNav {
+  position: absolute;
+  right: 25px;
+}
+/* -------------------- NAVBAR SECTION --------------------*/
+
+/* -------------------- HOME PAGE SECTION --------------------*/
+#homePage {
+  background-color: salmon;
+  border: 1px solid white;
+  border-radius: 6px;
+  margin: auto;
+  margin-top: 12%;
+  padding: 20px;
+  width: 50%;
+  text-align: center;
+}
+
+#landingText {
+  font-weight: bold;
+  font-size: 35px;
+  margin: auto;
+  margin-bottom: 30px;
+  padding: 5px;
+}
+
+#goToLogin {
+  margin: auto;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 8px;
+  transition: background-color 0.5s ease;
+  background-color: blue;
+  width: 120px;
+  height: 60px;
+}
+/* -------------------- HOME PAGE SECTION --------------------*/
+
+/* -------------------- CONTACT SECTION --------------------*/
+#contactPage {
+  width: 30%;
+  text-align: center;
+  margin: auto;
+  padding: 10px;
+  background-color: aliceblue;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+
+#contactPage > p {
+  margin: auto;
+}
+/* -------------------- CONTACT SECTION --------------------*/
+
 /* -------------------- SIGNUP SECTION --------------------*/
 #signupForm {
+  width: 50%;
+  margin: auto;
+  background-color: aliceblue;
+  border: 1px solid grey;
   text-align: center;
   padding: 10px;
 }
@@ -166,15 +258,27 @@ button {
 
 /* -------------------- LOGIN SECTION --------------------*/
 h1 {
+  font-weight: bold;
+  color: white;
+  display: block;
   text-align: center;
-  margin: 10px 0 10px 0;
-  background-color: bisque;
+  padding: 20px 0px 10px 0px;
+  height: 50px;
+  background-color: #99ccff;
 }
 
 #slogan {
   font-size: 12px;
   text-align: center;
   color: grey;
+  background-color: #99ccff;
+}
+
+#loginForm {
+  padding: 10px;
+  background-color: cornflowerblue;
+  border-radius: 4px;
+  border: 2px solid grey;
 }
 
 #loginForm, #locationForm {
@@ -213,20 +317,7 @@ h1 {
   margin-top: 20px !important;
 }
 
-#decline {
-  background-color: brown;
-}
-
-#decline:hover {
-  background-color: indianred;
-}
-
-#waitingRoom {
-  margin: 40px 25% 60px 25%;
-  text-align: center;
-}
-
-#questionForm, #disclaimerForm, #locationForm {
+#questionForm, #questionForm2, #disclaimerForm, #locationForm {
   height: 20%;
   width: 75%;
   margin: auto;
@@ -248,6 +339,12 @@ h1 {
   margin-bottom: 5px;
   text-align: center;
   font-size: 20px;
+}
+
+.tripText {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 #questionSubText, #disclaimerSubText {
@@ -309,10 +406,21 @@ h1 {
 /* ----------------- SETUP CONFIRMATION SECTION -----------------*/
 
 /* -------------------- LIST SECTION --------------------*/
-#moveList > li, .itemContainer {
-  width: 50%;
+#moveList {
+  border: 1px solid grey;
+  background-color: #e6e9ef;
+  width: 60%;
+  margin: auto;
+  text-align: center;
+  padding: 30px;
+}
+
+#moveList > li{
+  width: 70%;
   padding: 5px 5px 5px 30px;
-  margin: 5px 0 5px 40px;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
   border: 1px solid grey;
   background-color: aliceblue;
   list-style-type: none;
@@ -330,19 +438,48 @@ h1 {
 }
 
 .checkBox {
- float: right;
- position: relative;
- left: 40px;
+  display: inline-block;
+  float: right;
+  border-radius: 4px;
+  background-color: grey;
+  border: 1px solid darkgrey;
+}
+
+.done-label {
+  font-size: 10px;
 }
 
 .checked {
-  background-color: grey !important;
   text-decoration: line-through;
+  background-color: grey;
+}
+
+.bestOnYelp {
+  color: gold;
+  margin: auto;
 }
 
 .yelpResult {
-  border: 2px dotted red;
+  margin: auto;
 }
+
+.toggleBox {
+  position: relative;
+  right: 24px;
+  bottom: 5px;
+  float: left;
+  border: 1px solid grey;
+  background-color: darkgrey;
+  border-radius: 4px;
+  height: 20px;
+  width: 20px;
+  padding: 3px;
+  margin: 3px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+
 
 /* -------------------- LIST SECTION--------------------*/
 
@@ -350,27 +487,28 @@ h1 {
 footer > p {
   font-size: 8px;
   transition: font-size 0.75s ease;
-  width: 38%;
   margin-left: 7%;
-}
-
-footer > p:hover {
-  font-size: 12px;
-}
-
-footer > p a {
-  text-decoration: none;
+  background-color: lightgrey;
+  width: 130px;
 }
 /* ------- HIDE PAGES TO SIMULATE FLOW ------- */
-#signupPage, #signupSuccessPage, #loginPage, #locationPage, #setupConfirmPage, #listPage, #waitingRoom {
+#signupPage, #disclaimerPage, #signupSuccessPage, #locationPage, #setupConfirmPage, #listPage, #waitingRoom, #contactPage {
   display: none;
 }
 
-#disclaimerPage {
-  display: ;
+#loginPage {
+  display: none;
 }
 
 #setupPage {
+  display: none;
+}
+
+#homePage {
+  display: ;
+}
+
+.hidden {
   display: none;
 }
 /* -------------------- UNIVERSAL --------------------*/

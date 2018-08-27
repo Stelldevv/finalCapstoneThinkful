@@ -46,9 +46,9 @@ let state = {
       task: [ "Find a Home to Purchase" ]
     },
     {
-      question: "Would you like Moovit to text or email you reminders as you approach your moving deadlines?",
+      question: "Would you like Moovit to email you reminders as you approach your moving deadline?",
       subtext: "You may opt into phone or email reminders as we prepare for our journey to foreign lands! (May be disabled at any time)",
-      task: [ "Setup Reminders" ]
+      task: [ "Setup Email Reminders" ]
     }
   ]
 };

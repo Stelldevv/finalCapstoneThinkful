@@ -19,27 +19,32 @@
       <p id="slogan">Getting you there since 2018!</p>
     </header>
     <main>
-      <!-- The Disclaimer page begins here -->
-      <section id="disclaimerPage">
+      <!-- The Navigation Bar begins here -->
+      <ul id="navBar">
+        <li><a id="homeNav" href="#home">Home</a></li>
+        <li><a id="contactNav" href="#contact">Contact</a></li>
+        <li><a id="aboutNav" href="#about">About</a></li>
+        <li><a id="userNav" href="#user">Log In</a></li>
+      </ul>
+      <!-- The Navigation Bar ends here -->
+
+      <!-- The Home page begins here -->
+      <section id="homePage" class="page">
+        <p id="landingText">Let's embark on a journey.</p>
+        <button type="button" id="goToLogin">Yeah!</button>
+      </section>
+      <!-- The Home page ends here -->
+
+      <!-- The About page begins here -->
+      <section id="disclaimerPage" class="page">
         <form id="disclaimerForm">
-          <p id="disclaimerText"> Moovit Disclaimer </p>
-          <p id="disclaimerSubText"> This application uses location information to provide functionality. None of the data that you provide will be used for anything other than serving you here. I, Joshua Stelly, on pain of eternal shame and syntax errors, promise to guard your information. <br> <br>
-            
-          By clicking "Accept", you agree to the above and will be directed to the login screen. <br> <br>
-            
-          By clicking "Decline", you will be directed to the waiting room while you reconsider your decision. </p>
-          <button type="button" id="accept" class="button">Accept</button>
-          <button type="button" id="decline" class="button">Decline</button>
+          <p id="disclaimerSubText"> This application uses location information to provide functionality. The data that enables this functionality is provided by entities like Yelp and Google. None of the data that you provide will be used for anything other than serving you here. I, Joshua Stelly, on pain of eternal shame and syntax errors, promise to guard your information. <br> <br>
         </form>
       </section>
-      <section id="waitingRoom">
-        <script src="https://cdn.htmlgames.com/embed.js?game=ClassicPac&amp;width=400&amp;height=240&amp;bgcolor=black"></script>
-        <button type="button" class='button' id="leaveWaiting" class="button">Return to Disclaimer</button>
-      </section>
-      <!-- The Disclaimer page ends here -->
+      <!-- The About page ends here -->
 
       <!-- The Signup page begins here -->
-      <section id="signupPage">
+      <section id="signupPage" class="page">
         <form id="signupForm">
           <label for="userField"></label>
           <input id="userField" class='input' type="text" name="userField" placeholder="Username" required> <br>
@@ -55,7 +60,7 @@
       <!-- The Signup page ends here -->
 
       <!-- The Signup Success page begins here -->
-      <section id="signupSuccessPage">
+      <section id="signupSuccessPage" class="page">
         <p id="successText">You have successfully signed up for Moovit. <br> </p>
         
         <p>Follow the link sent to <span id="signupSuccessEmail">[ERROR: EMAIL NOT FOUND]</span> to confirm your account.</p>
@@ -64,12 +69,13 @@
       <!-- The Signup Success page ends here -->
 
       <!-- The Login page begins here -->
-      <section id="loginPage">
+      <section id="loginPage" class="page">
         <form id="loginForm">
+          <p> Log in </p> <br>
           <label for="userField"></label>
-          <input id="userField" class='input' type="text" name="userField" placeholder="Email or Username"> <br>
+          <input id="userField2" class='input' type="text" name="userField" placeholder="Username"> <br>
           <label for="passField"></label>
-          <input id="passField" class="input" type="password" name="passField" placeholder="Password"> <br>
+          <input id="passField2" class="input" type="password" name="passField" placeholder="Password"> <br>
           <button type="submit" id="login">Login</button>
           <br>
           <button type="submit" id="register">Sign up</button>
@@ -78,9 +84,9 @@
       <!-- The Login page ends here -->
 
       <!-- The Setup interface begins here -->
-      <section id="locationPage">
+      <section id="locationPage" class="page">
         <form id="locationForm">
-          <label for="locationField">Where are you currently located?</label> <br>
+          <label for="locationField">Where are you now?</label> <br>
           <input id="locationField" class='input' type="text" name="locationField" placeholder="IE San Diego, CA"> <br>
           <label for="destinationField">Where are you moving to?</label> <br>
           <input id="destinationField" class="input" type="text" name="destinationField" placeholder="IE Austin, TX"> <br>
@@ -89,7 +95,7 @@
         </form>
       </section>
 
-      <section id="setupPage">
+      <section id="setupPage" class="page">
         <form id="questionForm">
           <p id="questionText"> Are you doing a moving thing? </p>
           <p id="questionSubText"> Moovit will help you with a moving thing by doing a robot thing.</p>
@@ -100,8 +106,8 @@
       <!-- The Setup interface ends here -->
 
       <!-- The Setup Confirmation interface begins here -->
-      <section id="setupConfirmPage">
-        <form id="questionForm">
+      <section id="setupConfirmPage" class="page">
+        <form id="questionForm2">
           <p id="questionText"> Does the list below accurately describe your goals? </p>
           <p id="tripText">Travelling from <span class="fromCity"></span> to <span class="toCity"></span>.</p>
           <p id="confirmList"> <ul></ul> </p>
@@ -112,22 +118,25 @@
       <!-- The Setup Confirmation interface ends here -->
 
       <!-- The List page begins here -->
-      <section id="listPage">
-        <p class="tripText"><span class="fromCity"></span> to <span class="toCity"></span></p>
+      <section id="listPage" class="page">
+        <p class="tripText">My trip from<br><span class="fromCity"></span> to <span class="toCity"></span></p>
         <ul id="moveList">
+          <!-- List is constructed here by client.js -->
         </ul>
       </section>
       <!-- The List page ends here -->
 
-      <!-- API Action page begins here -->
-      <section id="infoDisplay"></section> 
-      <!-- API Action page ends here -->
+      <!-- The Contact page begins here -->
+      <section id="contactPage" class="page">
+        <p>Developed by Joshua Stelly</p><br>
+        <p>If you have any issues, questions, or comments, my contact information is below:</p><br>
+        <p>Email: <a href="mailto:stelldevv@gmail.com">stelldevv@gmail.com</a></p>
+        <p>Phone: 225-610-5733</p>
+      </section>
+      <!-- The Contact page ends here -->
 
     </main>
     <footer>
-      <p>Have a question? Just want to chat? <br>
-      Message me at <a href="mailto:stelldevv@gmail.com">
-      stelldevv@gmail.com</a>!</p>
     </footer>
   </body>
 </html>

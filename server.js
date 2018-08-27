@@ -3,12 +3,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 var request = require('request');
-var options = {
-  url: 'https://api.yelp.com/v3/businesses/search?{service}&{location}&start=0&sortby=review_count',
-  headers: {
-    'Authorization': 'Bearer gxzAI1gpNgnHmS-yFroH633b3LmnU31Uxe8xDxMuxIpM5O9E16zEC1EIUwGD-IAQF1UhI223FGhtixLsiBIUMsNNaTgoczcaRZu9LJ6EEZZYsc1Mpwoafp4dmxB2W3Yx'
-  }
-};
 
 // Mongoose internally uses a promise-like object,
 // but its better to make Mongoose use built in es6 promises
@@ -17,6 +11,8 @@ mongoose.Promise = global.Promise;
 // config.js is where we control constants for entire
 // app like PORT and DATABASE_URL
 const { PORT, DATABASE_URL } = require("./config");
+const { User, Login, List } = require('./models');
+
 const app = express();
 
 app.use(express.json());
@@ -49,19 +45,45 @@ app.get('/users', (req, res) => {
     });
 });
 
+app.get('/login/:username/:password', (req, res) => {
+	//let username = req.params.username;
+	//let password = req.params.password;
+	var status;
+  User
+    .findOne({ username: req.params.username })
+    .then(user => {
+      if (user.password == req.params.password) {
+        status = "Success";
+        const message = `Login ` + status + " - " + req.params.username;
+        console.log(message);
+        res.json(status);
+      } else {
+      	status = "Failure";
+      	const message = `Login ` + status + " - " + req.params.username;
+      	console.log(message);
+      	res.json(status);
+      }
+  })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'something went terribly wrong' });
+    });
+});
+
 app.get('/yelp/:city/:service', (req, res) => {
-	let city = "location=".concat(req.params.city);
-	let service = "term=".concat(req.params.service);
-	options.url = options.url.replace("{location}", city);
-	options.url = options.url.replace("{service}", service);
-	request.get(options, (error, body, response) => {
-	res.status(200).json(JSON.parse(body.body).businesses[0].name);
+	var options = {
+  		url: 'https://api.yelp.com/v3/businesses/search?{service}&{location}&sortby=review_count',
+  		headers: {
+    		'Authorization': 'Bearer gxzAI1gpNgnHmS-yFroH633b3LmnU31Uxe8xDxMuxIpM5O9E16zEC1EIUwGD-IAQF1UhI223FGhtixLsiBIUMsNNaTgoczcaRZu9LJ6EEZZYsc1Mpwoafp4dmxB2W3Yx'
+  		}
+	}
+		let city = "location=".concat(req.params.city);
+		let service = "term=".concat(req.params.service);
+		options.url = options.url.replace("{service}&{location}", service + '&' + city);
+		request.get(options, (error, body, response) => {
+		res.status(200).json(JSON.parse(body.body).businesses[0]);
 	})
-
-	//request.get('http://some.server.com/').auth(null, null, true, 'bearerToken'); // or request.get('http://some.server.com/', { 'auth': { 'bearer': 'bearerToken' } });
-
 })
-
 
 app.post('/users', (req, res) => {
   const requiredFields = ['username', 'email', 'password'];
@@ -89,7 +111,7 @@ app.post('/users', (req, res) => {
             password: req.body.password
           })
           .then(user => res.status(201).json({
-              _id: userr.id,
+              _id: user.id,
               username: user.username,
               email: user.email,
               password: user.password
@@ -145,7 +167,7 @@ app.put('/users/:id', (req, res) => {
 });
 
 app.delete('/users/:id', (req, res) => {
-  BlogPost
+  User
     .remove({ user: req.params.id })
     .then(() => {
       User
@@ -208,3 +230,4 @@ if (require.main === module) {
   runServer(DATABASE_URL).catch(err => console.error(err));
 }
 
+module.exports = { runServer, app, closeServer };

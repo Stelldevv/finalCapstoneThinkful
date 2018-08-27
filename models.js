@@ -15,9 +15,12 @@ var userSchema = mongoose.Schema({
   password: 'string'
 });
 
+var loginSchema = mongoose.Schema({
+  username: 'string',
+  password: 'string'
+});
+
 var listSchema = mongoose.Schema({ content: [] });
-
-
 
 //blogPostSchema.methods.serialize = function() {
   //return {
@@ -29,7 +32,8 @@ var listSchema = mongoose.Schema({ content: [] });
   //};
 //};
 
-var userData = mongoose.model('User', userSchema);
-var listData = mongoose.model('List', listSchema);
+var User = mongoose.model('User', userSchema);
+var Login = mongoose.model('Login', loginSchema);
+var List = mongoose.model('List', listSchema);
 
-module.exports = {User, List};
+module.exports = {User, Login, List};
