@@ -189,7 +189,7 @@ app.post('/users', (req, res) => {
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`;
       console.error(message);
-      return res.status(400).send(message);
+      res.status(400).send(message);
     }
   });
 
@@ -199,7 +199,7 @@ app.post('/users', (req, res) => {
       if (user) {
         const message = `Username already taken`;
         console.error(message);
-        return res.status(400).send(message);
+        res.status(400).send(message);
       }
       else {
         User
