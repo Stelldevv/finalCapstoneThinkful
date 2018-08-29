@@ -57,8 +57,8 @@ function landingPage() {
   $('#homePage').on('click', '#goToLogin', function (event) {
     $('.page').css('display', 'none');
     $('#loginPage').css('display', 'block');
-    }
-    
+    });
+
 };
 
 function login() {
