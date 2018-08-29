@@ -145,7 +145,7 @@ function registerUser () {
       $.getJSON(USER_ENDPOINT, function(response) {
           userList = response;
           for (let i = 0; i < userList.length; i++) {
-            if (userList[i].name == username) {
+            if (userList[i].username == username) {
               var message = 'Username Taken';
             } else {
               var message = 'Username Available';
