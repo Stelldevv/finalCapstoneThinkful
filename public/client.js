@@ -55,7 +55,7 @@ function navbar () {
 function landingPage() {
 
   $('#homePage').on('click', '#goToLogin', function (event) {
-    if (list !== [''] && ACTIVE_USER !== undefined) {
+    if (list !== [] && ACTIVE_USER !== undefined) {
       $('.page').css('display', 'none');
       $('#listPage').css('display', 'block');
     } else {
