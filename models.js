@@ -15,12 +15,12 @@ var userSchema = mongoose.Schema({
   password: 'string'
 });
 
-var loginSchema = mongoose.Schema({
+var tripSchema = mongoose.Schema({
+  list: 'array',
   username: 'string',
-  password: 'string'
+  location: 'string',
+  destination: 'string'
 });
-
-var listSchema = mongoose.Schema({ content: [] });
 
 //blogPostSchema.methods.serialize = function() {
   //return {
@@ -33,7 +33,6 @@ var listSchema = mongoose.Schema({ content: [] });
 //};
 
 var User = mongoose.model('User', userSchema);
-var Login = mongoose.model('Login', loginSchema);
-var List = mongoose.model('List', listSchema);
+var Trip = mongoose.model('Trip', tripSchema);
 
-module.exports = {User, Login, List};
+module.exports = {User, Trip};

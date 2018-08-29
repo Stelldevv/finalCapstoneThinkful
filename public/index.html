@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Moovit!</title>
-    <meta name="description" content="A cool capstone project!">
+    <title>Planit!</title>
+    <meta name="description" content="A cool capstone project.">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +14,7 @@
   <body>
     <header>
       <h1>
-        Moovit(name change pending)
+        Planit
       </h1>
       <p id="slogan">Getting you there since 2018!</p>
     </header>
@@ -24,7 +24,8 @@
         <li><a id="homeNav" href="#home">Home</a></li>
         <li><a id="contactNav" href="#contact">Contact</a></li>
         <li><a id="aboutNav" href="#about">About</a></li>
-        <li><a id="userNav" href="#user">Log In</a></li>
+        <li id="tripNavButton"><a id="tripNav" href="#trips">My Trip</a></li>
+        <li><a id="userNav" href="#user">Log in</a></li>
       </ul>
       <!-- The Navigation Bar ends here -->
 
@@ -61,9 +62,9 @@
 
       <!-- The Signup Success page begins here -->
       <section id="signupSuccessPage" class="page">
-        <p id="successText">You have successfully signed up for Moovit. <br> </p>
+        <p id="successText">You have successfully signed up for Planit. <br> </p>
         
-        <p>Follow the link sent to <span id="signupSuccessEmail">[ERROR: EMAIL NOT FOUND]</span> to confirm your account.</p>
+        <p>[Feature to be implemented] Follow the link sent to <span id="signupSuccessEmail">[ERROR: EMAIL NOT FOUND]</span> to confirm your account.</p>
         <button type="submit" id="returnToLogin">Back to Login</button>
       </section>
       <!-- The Signup Success page ends here -->
@@ -98,7 +99,7 @@
       <section id="setupPage" class="page">
         <form id="questionForm">
           <p id="questionText"> Are you doing a moving thing? </p>
-          <p id="questionSubText"> Moovit will help you with a moving thing by doing a robot thing.</p>
+          <p id="questionSubText"> Planit will help you with a moving thing by doing a robot thing.</p>
           <button type="button" class="button yesButton" >Yes!</button>
           <button type="button" class="button noButton" >No.</button>
         </form>
@@ -109,7 +110,7 @@
       <section id="setupConfirmPage" class="page">
         <form id="questionForm2">
           <p id="questionText"> Does the list below accurately describe your goals? </p>
-          <p id="tripText">Travelling from <span class="fromCity"></span> to <span class="toCity"></span>.</p>
+          <p class="tripText">Travelling from <span class="fromCity"></span> to <span class="toCity"></span>.</p>
           <p id="confirmList"> <ul></ul> </p>
           <button type="button" class="button confirmButton" >Yup!</button>
           <button type="button" class="button retryButton" >Nope! (Try Again)</button>
@@ -119,10 +120,11 @@
 
       <!-- The List page begins here -->
       <section id="listPage" class="page">
-        <p class="tripText">My trip from<br><span class="fromCity"></span> to <span class="toCity"></span></p>
+        <p id="tripText">My trip from <span class="fromCity"></span> to <span class="toCity"></span></p>
         <ul id="moveList">
           <!-- List is constructed here by client.js -->
         </ul>
+        <button type="button" id="restartButton">Restart List</button>
       </section>
       <!-- The List page ends here -->
 

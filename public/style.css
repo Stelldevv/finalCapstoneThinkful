@@ -151,11 +151,20 @@ html {
   position: absolute;
   right: 25px;
 }
+
+#tripNav {
+  position: absolute;
+  right: 100px;
+}
+
+#tripNavButton {
+  display: none;
+}
 /* -------------------- NAVBAR SECTION --------------------*/
 
 /* -------------------- HOME PAGE SECTION --------------------*/
 #homePage {
-  background-color: salmon;
+  background-color: rgba(193, 66, 66, 0.85);
   border: 1px solid white;
   border-radius: 6px;
   margin: auto;
@@ -406,8 +415,13 @@ h1 {
 /* ----------------- SETUP CONFIRMATION SECTION -----------------*/
 
 /* -------------------- LIST SECTION --------------------*/
+#listPage {
+  text-align: center;
+}
+
 #moveList {
   border: 1px solid grey;
+  border-radius: 6px;
   background-color: #e6e9ef;
   width: 60%;
   margin: auto;
@@ -432,9 +446,28 @@ h1 {
   display: block;
 }
 
+#tripText {
+  margin: auto;
+  margin-bottom: 20px;
+  width: 250px;
+  height: auto;
+  text-align: center;
+  background-color: rgba(147, 148, 150, 0.8);
+  border: 2px solid black;
+  border-radius: 6px;
+}
+
 .itemContent {
   display: none;
   margin: 5px 0 5px 0;
+}
+
+#intTravel {
+  font-size: 14px;
+}
+
+.featureText {
+  font-size: 10px;
 }
 
 .checkBox {
@@ -477,8 +510,51 @@ h1 {
   margin: 3px;
   font-size: 11px;
   font-weight: bold;
+  transition: background-color ease 0.25s;
 }
 
+.toggleBox:hover {
+  background-color: grey;
+}
+
+.deleteBox {
+  display: inline-block;
+  position: relative;
+  left: 3px;
+  bottom: 5px;
+  float: right;
+  border: 1px solid grey;
+  background-color: brown;
+  border-radius: 4px;
+  height: 20px;
+  width: 20px;
+  padding: 3px;
+  margin: 3px;
+  font-size: 11px;
+  font-weight: bold;
+  transition: background-color ease 0.25s;
+}
+
+.deleteBox:hover {
+  background-color: #d18f3a;
+}
+
+#restartButton {
+  background-color: brown;
+  margin: auto;
+  padding: 8px 12px 8px 12px;
+  border-radius: 5px;
+  margin: 20px 8px 10px 8px;
+  transition: background-color ease 0.25s;
+}
+
+#restartButton:hover {
+  background-color: orange;
+}
+
+#restartButton:active {
+  background-color: gold;
+}
 
 
 /* -------------------- LIST SECTION--------------------*/

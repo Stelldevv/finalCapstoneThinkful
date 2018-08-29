@@ -10,8 +10,8 @@ mongoose.Promise = global.Promise;
 
 // config.js is where we control constants for entire
 // app like PORT and DATABASE_URL
-const { PORT, DATABASE_URL } = require("./config");
-const { User, Login, List } = require('./models');
+const { PORT, DATABASE_URL, DATABASE_URL2 } = require("./config");
+const { User, Trip } = require('./models');
 
 const app = express();
 
@@ -70,6 +70,100 @@ app.get('/login/:username/:password', (req, res) => {
     });
 });
 
+app.get('/trip/:username', (req, res) => {
+  Trip
+    .findOne({ username: req.params.username })
+    .then(tripData => {
+      if (tripData == null) {
+      	console.log("No Trips found.");
+      	res.json('not found')
+      } else {
+      	console.log("Trip contains " + tripData);
+      	res.json(tripData);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'something went terribly wrong' });
+    });
+});
+
+app.post('/trip', (req, res) => {
+	const requiredFields = ['list', 'username', 'location', 'destination'];
+  requiredFields.forEach(field => {
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  });
+
+  Trip
+  	.create({
+       list: req.body.list,
+       username: req.body.username,
+       location: req.body.location,
+       destination: req.body.destination
+    })
+    .then(trip => res.status(201).json({
+       _id: trip.id,
+       list: trip.list,
+       username: trip.username,
+       location: trip.location,
+       destination: trip.destination
+    }))
+    .catch(err => {
+       console.error(err);
+       res.status(500).json({ error: 'Something went wrong' });
+    });
+})
+
+app.put('/trip/:id', (req, res) => {
+  if (!(req.params.id && req.body.id === req.body.id)) {
+    res.status(400).json({
+      error: 'Request path id and request body id values must match'
+    });
+  }
+  const updated = {};
+  const updateableFields = ['list'];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      updated[field] = req.body[field];
+    }
+  });
+
+  Trip
+    .findOne({ list: updated.list || '', _id: { $ne: req.params.id } })
+    .then(() => {
+        Trip
+          .findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
+          .then(updatedTrip => {
+            res.status(200).json({
+              id: updatedTrip.id,
+              list: updatedTrip.list
+            });
+          })
+          .catch(err => res.status(500).json({ message: err }));
+    });
+});
+
+app.delete('/trip/:id', (req, res) => {
+  Trip
+    .remove({ trip: req.params.id })
+    .then(() => {
+      Trip
+        .findByIdAndRemove(req.params.id)
+        .then(() => {
+          console.log(`Deleted trip owned by user with id \`${req.params.id}\``);
+          res.status(204).json({ message: 'success' });
+        });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'something went terribly wrong' });
+    });
+});
+
 app.get('/yelp/:city/:service', (req, res) => {
 	var options = {
   		url: 'https://api.yelp.com/v3/businesses/search?{service}&{location}&sortby=review_count',
@@ -81,7 +175,11 @@ app.get('/yelp/:city/:service', (req, res) => {
 		let service = "term=".concat(req.params.service);
 		options.url = options.url.replace("{service}&{location}", service + '&' + city);
 		request.get(options, (error, body, response) => {
-		res.status(200).json(JSON.parse(body.body).businesses[0]);
+      if (JSON.parse(body.body).businesses !== undefined){
+        res.status(200).json(JSON.parse(body.body).businesses[0]);
+      } else {
+        res.status(200).json("Result not found");
+      }
 	})
 })
 
