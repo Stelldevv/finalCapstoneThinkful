@@ -85,7 +85,6 @@ function login() {
                 fromCity = TRIP_DATA.location;
                 toCity = TRIP_DATA.destination;
                 tripID = TRIP_DATA._id;
-                console.log('Trip: ' + fromCity + " to " + toCity + " found.")
                 $('.fromCity').text(fromCity);
                 $('.toCity').text(toCity);
                 buildList();
@@ -151,7 +150,6 @@ function registerUser () {
         contentType : 'application/json',
         type : 'POST'
       })
-      console.log(userData + 'posted to User Database.');
       $('#signupSuccessEmail').text(email);
       $('.page').css('display', 'none');
       $('#signupSuccessPage').css('display', 'block');
@@ -251,7 +249,6 @@ function createList () {
         toCity = TRIP_DATA.destination;
         tripID = TRIP_DATA._id;
       } else {
-        console.log('Failed to retrieve Trip ID from server.');
       }
     });
   });
@@ -360,12 +357,10 @@ function moveList() {
   });
 
   $('#moveList').on('click', '.deleteBox', function (event) {
-    var removeItem = $(this).closest('li').find('.listItem').text()
-    console.log('Removing: ' + removeItem + ' from list');   
+    var removeItem = $(this).closest('li').find('.listItem').text()   
     list = $.grep(list, function(value) {
       return value != removeItem;
     })
-    console.log('Updated list: ' + list);
     $(this).closest('li').remove();
     const LIST_UPDATE = TRIP_ENDPOINT + '/' + tripID;
     var listUpdate = {
