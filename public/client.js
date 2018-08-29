@@ -55,14 +55,10 @@ function navbar () {
 function landingPage() {
 
   $('#homePage').on('click', '#goToLogin', function (event) {
-    if (list !== []) {
-      $('.page').css('display', 'none');
-      $('#listPage').css('display', 'block');
-    } else {
     $('.page').css('display', 'none');
     $('#loginPage').css('display', 'block');
     }
-  })
+    
 };
 
 function login() {
