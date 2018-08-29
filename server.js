@@ -27,24 +27,6 @@ function callback(error, response, body) {
   }
 }
 
-app.get('/users', (req, res) => {
-  User
-    .find()
-    .then(users => {
-      res.json(users.map(user => {
-        return {
-          id: user._id,
-          name: user.username,
-          email: user.email
-        };
-      }));
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({ error: 'something went terribly wrong' });
-    });
-});
-
 app.get('/login/:username/:password', (req, res) => {
 	//let username = req.params.username;
 	//let password = req.params.password;
@@ -182,6 +164,24 @@ app.get('/yelp/:city/:service', (req, res) => {
       }
 	})
 })
+
+app.get('/users', (req, res) => {
+  User
+    .find()
+    .then(users => {
+      res.json(users.map(user => {
+        return {
+          id: user._id,
+          username: user.username,
+          email: user.email
+        };
+      }));
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'something went terribly wrong' });
+    });
+});
 
 app.post('/users', (req, res) => {
   const requiredFields = ['username', 'email', 'password'];

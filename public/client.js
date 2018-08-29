@@ -10,6 +10,7 @@ var email;
 var password;
 var result;
 var status;
+var message;
 var ACTIVE_USER;
 var TRIP_DATA;
 var YELP_SEARCH_URL;
@@ -141,10 +142,25 @@ function registerUser () {
         "email": email,
         "password": password
       };
-      $.ajax(USER_ENDPOINT, {
-        data : JSON.stringify(userData),
-        contentType : 'application/json',
-        type : 'POST'
+      $.getJSON(USER_ENDPOINT, function(response) {
+          userList = response;
+          for (let i = 0; i < userList.length; i++) {
+            if (userList[i].name == username) {
+              var message = 'Username Taken';
+            } else {
+              var message = 'Username Available';
+            }
+          }
+          if (message == 'Username Taken') {
+            alert('Username Taken');
+            clearFormData();
+          } else {
+            $.ajax(USER_ENDPOINT, {
+              data : JSON.stringify(userData),
+              contentType : 'application/json',
+              type : 'POST'
+            })
+          }
       })
       $('#signupSuccessEmail').text(email);
       $('.page').css('display', 'none');
@@ -406,28 +422,9 @@ function clearFormData() {
   $('#userField2').val('');
   $('#passField2').val('');
   status = '';
+  message = '';
 
 };
-
-function GET_LIST () {
-
-}
-
-function POST_LIST () {
-
-}
-
-function PUT_LIST () {
-
-}
-
-function DELETE_LIST () {
-
-}
-
-function RETRIEVE_TRIP_ID () {
-
-}
 
 function load() {
 
