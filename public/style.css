@@ -429,7 +429,7 @@ h1 {
   padding: 30px;
 }
 
-#moveList > li{
+#moveList > li {
   width: 70%;
   padding: 5px 5px 5px 30px;
   margin: auto;
@@ -565,6 +565,17 @@ footer > p {
   background-color: lightgrey;
   width: 130px;
 }
+
+@media only screen and (max-width: 320px){
+  #landingText {
+    font-size: 25px;
+  }
+  #moveList > li {
+  	width: 30%;
+  }
+
+}
+
 /* ------- HIDE PAGES TO SIMULATE FLOW ------- */
 #signupPage, #disclaimerPage, #signupSuccessPage, #locationPage, #setupConfirmPage, #listPage, #waitingRoom, #contactPage {
   display: none;
