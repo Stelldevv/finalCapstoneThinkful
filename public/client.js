@@ -17,8 +17,8 @@ var YELP_SEARCH_URL;
 //var AIRPORT_SEARCH_URL1;
 //var AIRPORT_SEARCH_URL2;
 var LOAD_TRIP_URL;
-const USER_ENDPOINT = 'https://calm-hollows-72370.herokuapp.com/users';
-const TRIP_ENDPOINT = 'https://calm-hollows-72370.herokuapp.com/trip';
+const USER_ENDPOINT = 'https://localhost:8080/users';
+const TRIP_ENDPOINT = 'https://localhost:8080/trip';
 
 function navbar () {
 
@@ -58,6 +58,12 @@ function landingPage() {
   $('#homePage').on('click', '#goToLogin', function (event) {
     $('.page').css('display', 'none');
     $('#loginPage').css('display', 'block');
+    ACTIVE_USER = '';
+    resetList();
+    $('#tripNavButton').css('display', 'none');
+    $('#userNav').text('Log In');
+    $('.page').css('display', 'none');
+    $('#loginPage').css('display', 'block');
     });
 
 };
@@ -68,15 +74,15 @@ function login() {
         event.preventDefault();
         var userLogin = $('#userField2').val();
         var passLogin = $('#passField2').val();
-        const LOGIN_ENDPOINT = 'https://calm-hollows-72370.herokuapp.com/login/' + userLogin + '/' + passLogin + '/';
+        const LOGIN_ENDPOINT = 'https://localhost:8080/login/' + userLogin + '/' + passLogin + '/';
         $.getJSON(LOGIN_ENDPOINT, function(response) {
           status = response;
           if (status == "Success") {
-            alert('Welcome to Planit!');
             ACTIVE_USER = userLogin;
-            LOAD_TRIP_URL = 'https://calm-hollows-72370.herokuapp.com/trip/' + ACTIVE_USER;
+            LOAD_TRIP_URL = 'https://localhost:8080/trip/' + ACTIVE_USER;
             $.getJSON(LOAD_TRIP_URL, function(response) {
               if (response !== 'not found') {
+                //add alert: success here
                 TRIP_DATA = response;
                 list = TRIP_DATA.list;
                 fromCity = TRIP_DATA.location;
@@ -98,10 +104,10 @@ function login() {
               }
             })
           } else if (status == "Failure") {
-            alert('Login Failed: Incorrect Password');
+            //add alert: invalid details here
             clearFormData();
           } else {
-            alert('Internal Server Error: Try Again Later');
+            //add alert: internal server error here
             clearFormData();
           }
         })
@@ -130,7 +136,7 @@ function registerUser () {
   $('#signupForm').on('click', '#signupButton', function (event) {
     event.preventDefault();
     if ($('#passField').val() !== $('#confirmPassField').val()) {
-      alert('Passwords do not match!');
+      //add alert: passwords do not match here
       $('#passField').val() = '';
       $('#confirmPassField').val() = '';
     } else if (username !== '' && email !== '' && password !== '') {
@@ -152,7 +158,7 @@ function registerUser () {
             }
           }
           if (message == 'Username Taken') {
-            alert('Username Taken');
+            //add alert: username taken here
             clearFormData();
           } else {
             $.ajax(USER_ENDPOINT, {
@@ -166,7 +172,7 @@ function registerUser () {
       $('.page').css('display', 'none');
       $('#signupSuccessPage').css('display', 'block');
     } else {
-      alert('Error! Try again');
+      //add alert: try again here
       clearFormData();
     }
   })
@@ -200,7 +206,7 @@ function beginSetup() {
         $('.page').css('display', 'none');
         $('#setupPage').css('display', 'block');
           } else {
-            alert('Error! Fill in both fields.');
+            //add alert: fill in both fields here
           }
       });
 
@@ -290,7 +296,7 @@ function buildList() {
       
       } else if (item == 'Ship your Vehicle') {
         service = 'vehicle shipping';
-        YELP_SEARCH_URL = 'https://calm-hollows-72370.herokuapp.com/yelp/' + fromCity + '/' + service + '/';
+        YELP_SEARCH_URL = 'https://localhost:8080/yelp/' + fromCity + '/' + service + '/';
         $.getJSON(YELP_SEARCH_URL, function(jsonData) {
           result = jsonData;
           yelpMap = result.name + ' ' + result.location.display_address;
@@ -301,7 +307,7 @@ function buildList() {
       
       } else if (item == 'Find a Storage Unit') {
         service = 'storage unit';
-        YELP_SEARCH_URL = 'https://calm-hollows-72370.herokuapp.com/yelp/' + fromCity + '/' + service + '/';
+        YELP_SEARCH_URL = 'https://localhost:8080/yelp/' + fromCity + '/' + service + '/';
         $.getJSON(YELP_SEARCH_URL, function(jsonData) {
           result = jsonData;
           yelpMap = result.name + ' ' + result.location.display_address;
@@ -312,7 +318,7 @@ function buildList() {
       
       } else if (item == 'Hire Movers') {
         service = 'movers';
-        YELP_SEARCH_URL = 'https://calm-hollows-72370.herokuapp.com/yelp/' + fromCity + '/' + service + '/';
+        YELP_SEARCH_URL = 'https://localhost:8080/yelp/' + fromCity + '/' + service + '/';
         $.getJSON(YELP_SEARCH_URL, function(jsonData) {
           result = jsonData;
           yelpMap = result.name + ' ' + result.location.display_address;
@@ -323,7 +329,7 @@ function buildList() {
       
       } else if (item == 'Rent a Moving Truck') {
         service = 'moving truck rental';
-        YELP_SEARCH_URL = 'https://calm-hollows-72370.herokuapp.com/yelp/' + fromCity + '/' + service + '/';
+        YELP_SEARCH_URL = 'https://localhost:8080/yelp/' + fromCity + '/' + service + '/';
         $.getJSON(YELP_SEARCH_URL, function(jsonData) {
           result = jsonData;
           yelpMap = result.name + ' ' + result.location.display_address;
