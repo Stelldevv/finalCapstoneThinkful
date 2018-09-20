@@ -78,6 +78,7 @@ function login() {
         $.getJSON(LOGIN_ENDPOINT, function(response) {
           status = response;
           if (status == "Success") {
+            console.log('success!');
             ACTIVE_USER = userLogin;
             LOAD_TRIP_URL = 'https://calm-hollows-72370.herokuapp.com/trip/' + ACTIVE_USER;
             $.getJSON(LOAD_TRIP_URL, function(response) {
