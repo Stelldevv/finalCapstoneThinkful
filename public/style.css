@@ -572,6 +572,7 @@ footer > p {
   }
   #moveList > li {
   	width: 30%;
+  	font-size: 10px;
   }
 
 }
