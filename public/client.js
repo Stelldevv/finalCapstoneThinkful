@@ -70,7 +70,7 @@ function landingPage() {
 
 function login() {
 
-      $('#loginPage').on('click', '#login', function (event) {
+      $('#loginForm').on('submit', function (event) {
         event.preventDefault();
         var userLogin = $('#userField2').val();
         var passLogin = $('#passField2').val();
