@@ -566,15 +566,52 @@ footer > p {
   width: 130px;
 }
 
-@media only screen and (max-width: 320px){
+@media only screen and (max-width: 460px){
   #landingText {
-    font-size: 25px;
+    font-size: 20px;
+  }
+  #moveList{
+    width: 80%
   }
   #moveList > li {
-  	width: 30%;
-  	font-size: 10px;
+  	width: 100%;
+  	font-size: 12px;
   }
-
+  #intTravel {
+    font-size: 10px;
+  }
+  .toggleBox {
+    position: relative;
+    bottom: 2px;
+    height: 15px;
+    width: 15px;
+    padding: 2px;
+    margin: 2px;
+    font-size: 9px;
+  }
+  .deleteBox {
+    position: relative;
+    bottom: 2px;
+    height: 15px;
+    width: 15px;
+    padding: 2px;
+    margin: 2px;
+    font-size: 8px;
+  }
+  .checkBox {
+    height: 15px;
+    width: 15px;
+    position: relative;
+    bottom: 2.5px;
+  }
+  #navBar > li a {
+    padding: 14px 16px;
+    font-size: 12px;
+  }
+  #contactPage {
+    width: 60%;
+    font-size: 10px;
+  }
 }
 
 /* ------- HIDE PAGES TO SIMULATE FLOW ------- */
