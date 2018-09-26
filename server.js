@@ -174,7 +174,7 @@ app.get('/yelp/:city/:service', (req, res) => {
 	}
 		let city = "location=".concat(req.params.city);
 		let service = "term=".concat(req.params.service);
-		options.url = options.url.replace("{service}&{location}", service + '&location=' + city);
+		options.url = options.url.replace("{service}&{location}", service + '&' + city);
 		request.get(options, (error, body, response) => {
       if (JSON.parse(body.body).businesses !== undefined){
         res.status(200).json(JSON.parse(body.body).businesses[0]);
