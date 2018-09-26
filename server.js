@@ -183,10 +183,6 @@ app.get('/yelp/:city/:service', (req, res) => {
         res.status(200).json("Result not found");
       }
 	})
-    .catch(function () {
-      res.status(404).json("Server failed to deliver API resource");
-      console.log("Promise Rejected");
-    });
 })
 
 app.get('/users', (req, res) => {
