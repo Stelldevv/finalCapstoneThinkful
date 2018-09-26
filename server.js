@@ -172,6 +172,7 @@ app.get('/yelp/:city/:service', (req, res) => {
     		'Authorization': 'Bearer gxzAI1gpNgnHmS-yFroH633b3LmnU31Uxe8xDxMuxIpM5O9E16zEC1EIUwGD-IAQF1UhI223FGhtixLsiBIUMsNNaTgoczcaRZu9LJ6EEZZYsc1Mpwoafp4dmxB2W3Yx'
   		}
 	}
+
 		let city = "location=".concat(req.params.city);
 		let service = "term=".concat(req.params.service);
 		options.url = options.url.replace("{service}&{location}", service + '&' + city);
@@ -183,6 +184,7 @@ app.get('/yelp/:city/:service', (req, res) => {
       }
 	})
     .catch(function () {
+      res.status(404).json("Server failed to deliver API resource");
       console.log("Promise Rejected");
     });
 })
