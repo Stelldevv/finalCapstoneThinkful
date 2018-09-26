@@ -180,7 +180,7 @@ app.get('/yelp/:city/:service', (req, res) => {
       if (JSON.parse(body.body).businesses !== undefined){
         res.status(200).json(JSON.parse(body.body).businesses[0]);
       } else {
-        res.status(200).json("Result not found");
+        res.status(204).json("Result not found");
       }
 	})
 })

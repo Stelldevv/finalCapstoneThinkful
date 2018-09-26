@@ -21,7 +21,7 @@ function seedUserData() {
     seededUserData.push({
       username: faker.internet.userName(),
       email: faker.internet.email(),
-      password: faker.internet.userName()
+      password: faker.random.word()
     });
   }
   return User.insertMany(seededUserData);
@@ -79,6 +79,21 @@ describe('Planit API resource', function () {
   });
 
   describe('GET endpoint', function () {
+
+    it('should return a valid Yelp results', function () {
+
+      let res;
+      let city = 'Austin';
+      let service = 'Barber';
+
+      return chai.request(app)
+        .get('/yelp/' + city + '/' + service)
+        .then(res => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.include.keys('name', 'rating', 'phone', 'location');
+        })
+    });
 
     it('should return all existing users', function () {
 
@@ -164,7 +179,6 @@ describe('Planit API resource', function () {
           resTrip.destination.should.equal(trip.destination);
         });
     });
-
   });
 
   describe('POST endpoint', function () {
@@ -174,7 +188,7 @@ describe('Planit API resource', function () {
       const newUser = {
         username: faker.internet.userName(),
         email: faker.internet.email(),
-        password: faker.internet.userName()
+        password: faker.random.word()
       };
 
       return chai.request(app)
@@ -243,7 +257,7 @@ describe('Planit API resource', function () {
       const updateData = {
         username: faker.internet.userName(),
         email: faker.internet.email(),
-        password: faker.internet.userName()
+        password: faker.random.word()
       };
 
       return User
@@ -300,7 +314,6 @@ describe('Planit API resource', function () {
           trip.destination.should.equal(updateData.destination);
         });
     });
-
   });
 
   describe('DELETE endpoint', function () {
@@ -342,7 +355,5 @@ describe('Planit API resource', function () {
           should.not.exist(_trip);
         });
     });
-
   });
-
 });
