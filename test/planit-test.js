@@ -2,15 +2,50 @@
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const faker = require('faker');
 const mongoose = require('mongoose');
 
 const should = chai.should();
+const expect = chai.expect;
 
 const { User, Trip } = require('../models');
 const { closeServer, runServer, app } = require('../server');
 const { TEST_DATABASE_URL } = require('../config');
 
 chai.use(chaiHttp);
+
+function seedUserData() {
+  console.info('seeding user data');
+  const seededUserData = [];
+  for (let i = 1; i <= 10; i++) {
+    seededUserData.push({
+      username: faker.internet.userName(),
+      email: faker.internet.email(),
+      password: faker.internet.userName()
+    });
+  }
+  return User.insertMany(seededUserData);
+}
+
+function seedTripData() {
+  console.info('seeding trip data');
+  const seededTripData = [];
+  for (let i = 1; i <= 10; i++) {
+    seededTripData.push({
+      list: [
+        faker.internet.userName(),
+        faker.internet.userName(),
+        faker.internet.userName(),
+        faker.internet.userName(),
+        faker.internet.userName(),
+      ],
+      username: faker.internet.userName(),
+      location: faker.address.city(),
+      destination: faker.address.city()
+    });
+  }
+  return User.insertMany(seededTripData);
+}
 
 function tearDownDb() {
   return new Promise((resolve, reject) => {
@@ -27,9 +62,13 @@ describe('Planit API resource', function () {
     return runServer(TEST_DATABASE_URL);
   });
 
+  beforeEach(function () {
+    return seedTripData(), seedUserData();
+  });
+
   afterEach(function () {
     return tearDownDb();
-  });
+  })
 
   after(function () {
     return closeServer();
@@ -37,14 +76,172 @@ describe('Planit API resource', function () {
 
   describe('GET endpoint', function () {
 
-    it('should return HTML', function () {
+    it('should return all existing users', function () {
+
       let res;
       return chai.request(app)
-        .get('https://calm-hollows-72370.herokuapp.com/')
+        .get('/users')
         .then(_res => {
           res = _res;
           res.should.have.status(200);
+          res.body.should.have.lengthOf.at.least(1);
+          return User.countDocuments();
         })
-      });
+        .then(count => {
+          res.body.should.have.lengthOf(count);
+        });
+    });
+
+    it('should return users with right fields', function () {
+
+      let resUser;
+      return chai.request(app)
+        .get('/users')
+        .then(function (res) {
+
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('array');
+          res.body.should.have.lengthOf.at.least(1);
+
+          res.body.forEach(function (user) {
+            user.should.be.a('object');
+            user.should.include.keys('id', 'username', 'email');
+          });
+          resUser = res.body[0];
+          return User.findById(resUser.id);
+        })
+        .then(user => {
+          resUser.username.should.equal(user.username);
+          resUser.email.should.equal(user.email);
+        });
+    });
+
+    it('should return all existing trips', function () {
+
+      let res;
+      return chai.request(app)
+        .get('/trips')
+        .then(_res => {
+          res = _res;
+          res.should.have.status(200);
+          res.body.should.have.lengthOf.at.least(1);
+          return Trip.countDocuments();
+        })
+        .then(count => {
+          res.body.should.have.lengthOf(count);
+        });
+    });
+
+    it('should return trips with right fields', function () {
+
+      let resTrip;
+      return chai.request(app)
+        .get('/trips')
+        .then(function (res) {
+
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('array');
+          res.body.should.have.lengthOf.at.least(1);
+
+          res.body.forEach(function (trip) {
+            trip.should.be.a('object');
+            trip.should.include.keys('id', 'list', 'username', 'location', 'destination');
+          });
+          resTrip = res.body[0];
+          return Trip.findById(resTrip.id);
+        })
+        .then(trip => {
+          resTrip.list.should.equal(trip.list);
+          resTrip.username.should.equal(trip.username);
+          resTrip.location.should.equal(trip.location);
+          resTrip.destination.should.equal(trip.destination);
+        });
+    });
+
+  });
+
+  describe('POST endpoint', function () {
+
+    it('should add a new user', function () {
+
+      const newUser = {
+        username: faker.internet.userName(),
+        email: faker.internet.email(),
+        password: faker.internet.userName()
+      };
+
+      return chai.request(app)
+        .post('/users')
+        .send(newUser)
+        .then(function (res) {
+          res.should.have.status(201);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.include.keys('id', 'username', 'email');
+          res.body.id.should.not.be.null;
+          res.body.username.should.equal(newUser.username);
+          res.body.email.should.equal(newUser.email);
+          return User.findById(res.body.id);
+        })
+        .then(function (user) {
+          user.username.should.equal(newUser.username);
+          user.email.should.equal(newUser.email);
+        });
     });
   });
+
+  describe('PUT endpoint', function () {
+
+    it('should update user fields you send over', function () {
+
+      const updateData = {
+        username: faker.internet.userName(),
+        email: faker.internet.email(),
+        password: faker.internet.userName()
+      };
+
+      return User
+        .findOne()
+        .then(user => {
+          updateData.id = user.id;
+
+          return chai.request(app)
+            .put(`/users/${user.id}`)
+            .send(updateData);
+        })
+        .then(res => {
+          res.should.have.status(204);
+          return User.findById(updateData.id);
+        })
+        .then(user => {
+          user.username.should.equal(updateData.username);
+          user.email.should.equal(updateData.email);
+        });
+    });
+  });
+
+  describe('DELETE endpoint', function () {
+
+    it('should delete a user by id', function () {
+
+      let user;
+
+      return User
+        .findOne()
+        .then(_user => {
+          user = _user;
+          return chai.request(app).delete(`/users/${user.id}`);
+        })
+        .then(res => {
+          res.should.have.status(204);
+          return User.findById(user.id);
+        })
+        .then(_user => {
+          should.not.exist(_user);
+        });
+    });
+  });
+
+});

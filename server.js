@@ -1,6 +1,7 @@
 "use strict";
 
 const express = require("express");
+const morgan = require("morgan");
 const mongoose = require("mongoose");
 var request = require('request');
 
@@ -10,12 +11,13 @@ mongoose.Promise = global.Promise;
 
 // config.js is where we control constants for entire
 // app like PORT and DATABASE_URL
-const { PORT, DATABASE_URL, TEST_DATABASE_URL } = require("./config");
+const { PORT, DATABASE_URL } = require("./config");
 const { User, Trip } = require('./models');
 
 const app = express();
 
 app.use(express.json());
+app.use(morgan("common"));
 app.use(express.static('public'));
 
 function callback(error, response, body) {
@@ -28,8 +30,6 @@ function callback(error, response, body) {
 }
 
 app.get('/login/:username/:password', (req, res) => {
-	//let username = req.params.username;
-	//let password = req.params.password;
 	var status;
   User
     .findOne({ username: req.params.username })
@@ -46,6 +46,26 @@ app.get('/login/:username/:password', (req, res) => {
       	res.json(status);
       }
   })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'something went terribly wrong' });
+    });
+});
+
+app.get('/trips', (req, res) => {
+  Trip
+    .find()
+    .then(trips => {
+      res.status(200).json(trips.map(trip => {
+        return {
+          id: trip._id,
+          list: trip.list,
+          username: trip.username,
+          location: trip.location,
+          destination: trip.destination
+        };
+      }));
+    })
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: 'something went terribly wrong' });
@@ -163,13 +183,16 @@ app.get('/yelp/:city/:service', (req, res) => {
         res.status(200).json("Result not found");
       }
 	})
+    .catch(function () {
+      console.log("Promise Rejected");
+    });
 })
 
 app.get('/users', (req, res) => {
   User
     .find()
     .then(users => {
-      res.json(users.map(user => {
+      res.status(200).json(users.map(user => {
         return {
           id: user._id,
           username: user.username,
@@ -209,10 +232,9 @@ app.post('/users', (req, res) => {
             password: req.body.password
           })
           .then(user => res.status(201).json({
-              _id: user.id,
+              id: user.id,
               username: user.username,
-              email: user.email,
-              password: user.password
+              email: user.email
             }))
           .catch(err => {
             console.error(err);
@@ -253,7 +275,7 @@ app.put('/users/:id', (req, res) => {
         User
           .findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
           .then(updatedUser => {
-            res.status(200).json({
+            res.status(204).json({
               id: updatedUser.id,
               username: updatedUser.username,
               email: updatedUser.email
@@ -281,36 +303,44 @@ app.delete('/users/:id', (req, res) => {
     });
 });
 
+app.use('*', function (req, res) {
+  res.status(404).json({ message: 'Not Found' });
+});
+
+// closeServer needs access to a server object, but that only
+// gets created when `runServer` runs, so we declare `server` here
+// and then assign a value to it in run
 let server;
 
-function runServer(databaseUrl, port = PORT) {
+// this function connects to our database, then starts the server
+function runServer(databaseUrl = DATABASE_URL, port = PORT) {
   return new Promise((resolve, reject) => {
-    mongoose.connect(
-      databaseUrl,
-      err => {
-        if (err) {
-          return reject(err);
-        }
-        server = app.listen(port, () => {
-            console.log(`Your app is listening on port ${port}`);
-            resolve();
-          })
-          .on("error", err => {
-            mongoose.disconnect();
-            reject(err);
-        });
+    mongoose.connect(databaseUrl, err => {
+      if (err) {
+        return reject(err);
       }
-    );
+      server = app.listen(port, () => {
+        console.log(`Your app is listening on port ${port}`);
+        resolve();
+      })
+        .on('error', err => {
+          mongoose.disconnect();
+          reject(err);
+        });
+    });  
   });
 }
 
+// this function closes the server, and returns a promise. we'll
+// use it in our integration tests later.
 function closeServer() {
   return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
-      console.log("Closing server");
+      console.log('Closing server');
       server.close(err => {
         if (err) {
-          return reject(err);
+          reject(err);
+          return;
         }
         resolve();
       });
@@ -318,8 +348,10 @@ function closeServer() {
   });
 }
 
+// if server.js is called directly (aka, with `node server.js`), this block
+// runs. but we also export the runServer command so other code (for instance, test code) can start the server as needed.
 if (require.main === module) {
-  runServer(DATABASE_URL).catch(err => console.error(err));
+  runServer().catch(err => console.error(err));
 }
 
 module.exports = { runServer, app, closeServer };
