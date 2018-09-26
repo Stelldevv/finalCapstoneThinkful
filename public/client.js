@@ -14,11 +14,9 @@ var message;
 var ACTIVE_USER;
 var TRIP_DATA;
 var YELP_SEARCH_URL;
-//var AIRPORT_SEARCH_URL1;
-//var AIRPORT_SEARCH_URL2;
 var LOAD_TRIP_URL;
 const USER_ENDPOINT = 'https://calm-hollows-72370.herokuapp.com/users';
-const TRIP_ENDPOINT = 'https://calm-hollows-72370.herokuapp.com/trip';
+const TRIP_ENDPOINT = 'https://calm-hollows-72370.herokuapp.com/trips';
 
 function navbar () {
 
@@ -80,7 +78,7 @@ function login() {
           if (status == "Success") {
             console.log('success!');
             ACTIVE_USER = userLogin;
-            LOAD_TRIP_URL = 'https://calm-hollows-72370.herokuapp.com/trip/' + ACTIVE_USER;
+            LOAD_TRIP_URL = 'https://calm-hollows-72370.herokuapp.com/trips/' + ACTIVE_USER;
             $.getJSON(LOAD_TRIP_URL, function(response) {
               if (response !== 'not found') {
                 //add alert: success here

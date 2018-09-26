@@ -37,14 +37,14 @@ function seedTripData() {
         faker.internet.userName(),
         faker.internet.userName(),
         faker.internet.userName(),
-        faker.internet.userName(),
+        faker.internet.userName()
       ],
       username: faker.internet.userName(),
       location: faker.address.city(),
       destination: faker.address.city()
     });
   }
-  return User.insertMany(seededTripData);
+  return Trip.insertMany(seededTripData);
 }
 
 function tearDownDb() {
@@ -63,12 +63,16 @@ describe('Planit API resource', function () {
   });
 
   beforeEach(function () {
-    return seedTripData(), seedUserData();
+    return seedUserData();
+  });
+
+  beforeEach(function () {
+    return seedTripData();
   });
 
   afterEach(function () {
     return tearDownDb();
-  })
+  });
 
   after(function () {
     return closeServer();
@@ -153,7 +157,8 @@ describe('Planit API resource', function () {
           return Trip.findById(resTrip.id);
         })
         .then(trip => {
-          resTrip.list.should.equal(trip.list);
+          resTrip.list.should.be.a('array');
+          resTrip.list.length.should.equal(trip.list.length);
           resTrip.username.should.equal(trip.username);
           resTrip.location.should.equal(trip.location);
           resTrip.destination.should.equal(trip.destination);
@@ -190,6 +195,45 @@ describe('Planit API resource', function () {
           user.email.should.equal(newUser.email);
         });
     });
+
+    it('should add a new trip', function () {
+
+      const newTrip = {
+        list: [
+          faker.internet.userName(),
+          faker.internet.userName(),
+          faker.internet.userName(),
+          faker.internet.userName(),
+          faker.internet.userName()
+        ],
+        username: faker.internet.userName(),
+        location: faker.address.city(),
+        destination: faker.address.city()
+      };
+
+      return chai.request(app)
+        .post('/trips')
+        .send(newTrip)
+        .then(function (res) {
+          res.should.have.status(201);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.include.keys('id', 'list', 'username', 'location', 'destination');
+          res.body.id.should.not.be.null;
+          res.body.list.length.should.equal(newTrip.list.length);
+          res.body.username.should.equal(newTrip.username);
+          res.body.location.should.equal(newTrip.location);
+          res.body.destination.should.equal(newTrip.destination);
+          return Trip.findById(res.body.id);
+        })
+        .then(function (trip) {
+          trip.list.length.should.equal(newTrip.list.length);
+          trip.username.should.equal(newTrip.username);
+          trip.location.should.equal(newTrip.location);
+          trip.destination.should.equal(newTrip.destination);
+        });
+    });
+
   });
 
   describe('PUT endpoint', function () {
@@ -212,7 +256,7 @@ describe('Planit API resource', function () {
             .send(updateData);
         })
         .then(res => {
-          res.should.have.status(204);
+          res.should.have.status(200);
           return User.findById(updateData.id);
         })
         .then(user => {
@@ -220,6 +264,43 @@ describe('Planit API resource', function () {
           user.email.should.equal(updateData.email);
         });
     });
+
+    it('should update trip fields you send over', function () {
+
+      const updateData = {
+        list: [
+          faker.internet.userName(),
+          faker.internet.userName(),
+          faker.internet.userName(),
+          faker.internet.userName(),
+          faker.internet.userName()
+        ],
+        username: faker.internet.userName(),
+        location: faker.address.city(),
+        destination: faker.address.city()
+      };
+
+      return Trip
+        .findOne()
+        .then(trip => {
+          updateData.id = trip.id;
+
+          return chai.request(app)
+            .put(`/trips/${trip.id}`)
+            .send(updateData);
+        })
+        .then(res => {
+          res.should.have.status(200);
+          return Trip.findById(updateData.id);
+        })
+        .then(trip => {
+          trip.list.length.should.equal(updateData.list.length);
+          trip.username.should.equal(updateData.username);
+          trip.location.should.equal(updateData.location);
+          trip.destination.should.equal(updateData.destination);
+        });
+    });
+
   });
 
   describe('DELETE endpoint', function () {
@@ -242,6 +323,26 @@ describe('Planit API resource', function () {
           should.not.exist(_user);
         });
     });
+
+    it('should delete a trip by id', function () {
+
+      let trip;
+
+      return Trip
+        .findOne()
+        .then(_trip => {
+          trip = _trip;
+          return chai.request(app).delete(`/trips/${trip.id}`);
+        })
+        .then(res => {
+          res.should.have.status(204);
+          return Trip.findById(trip.id);
+        })
+        .then(_trip => {
+          should.not.exist(_trip);
+        });
+    });
+
   });
 
 });

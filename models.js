@@ -22,16 +22,6 @@ var tripSchema = mongoose.Schema({
   destination: 'string'
 });
 
-//blogPostSchema.methods.serialize = function() {
-  //return {
-    //id: this._id,
-    //author: this.authorName,
-    //content: this.content,
-    //title: this.title,
-    //comments: this.comments
-  //};
-//};
-
 var User = mongoose.model('User', userSchema);
 var Trip = mongoose.model('Trip', tripSchema);
 

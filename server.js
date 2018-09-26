@@ -5,12 +5,8 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 var request = require('request');
 
-// Mongoose internally uses a promise-like object,
-// but its better to make Mongoose use built in es6 promises
 mongoose.Promise = global.Promise;
 
-// config.js is where we control constants for entire
-// app like PORT and DATABASE_URL
 const { PORT, DATABASE_URL } = require("./config");
 const { User, Trip } = require('./models');
 
@@ -58,7 +54,7 @@ app.get('/trips', (req, res) => {
     .then(trips => {
       res.status(200).json(trips.map(trip => {
         return {
-          id: trip._id,
+          id: trip.id,
           list: trip.list,
           username: trip.username,
           location: trip.location,
@@ -72,7 +68,7 @@ app.get('/trips', (req, res) => {
     });
 });
 
-app.get('/trip/:username', (req, res) => {
+app.get('/trips/:username', (req, res) => {
   Trip
     .findOne({ username: req.params.username })
     .then(tripData => {
@@ -90,7 +86,7 @@ app.get('/trip/:username', (req, res) => {
     });
 });
 
-app.post('/trip', (req, res) => {
+app.post('/trips', (req, res) => {
 	const requiredFields = ['list', 'username', 'location', 'destination'];
   requiredFields.forEach(field => {
     if (!(field in req.body)) {
@@ -108,7 +104,7 @@ app.post('/trip', (req, res) => {
        destination: req.body.destination
     })
     .then(trip => res.status(201).json({
-       _id: trip.id,
+       id: trip.id,
        list: trip.list,
        username: trip.username,
        location: trip.location,
@@ -120,14 +116,14 @@ app.post('/trip', (req, res) => {
     });
 })
 
-app.put('/trip/:id', (req, res) => {
+app.put('/trips/:id', (req, res) => {
   if (!(req.params.id && req.body.id === req.body.id)) {
     res.status(400).json({
       error: 'Request path id and request body id values must match'
     });
   }
   const updated = {};
-  const updateableFields = ['list'];
+  const updateableFields = ['list', 'username', 'location', 'destination'];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
@@ -142,14 +138,17 @@ app.put('/trip/:id', (req, res) => {
           .then(updatedTrip => {
             res.status(200).json({
               id: updatedTrip.id,
-              list: updatedTrip.list
+              list: updatedTrip.list,
+              username: updatedTrip.username,
+              location: updatedTrip.location,
+              destination: updatedTrip.destination
             });
           })
           .catch(err => res.status(500).json({ message: err }));
     });
 });
 
-app.delete('/trip/:id', (req, res) => {
+app.delete('/trips/:id', (req, res) => {
   Trip
     .remove({ trip: req.params.id })
     .then(() => {
@@ -175,7 +174,7 @@ app.get('/yelp/:city/:service', (req, res) => {
 	}
 		let city = "location=".concat(req.params.city);
 		let service = "term=".concat(req.params.service);
-		options.url = options.url.replace("{service}&{location}", service + '&' + city);
+		options.url = options.url.replace("{service}&{location}", service + '&location=' + city);
 		request.get(options, (error, body, response) => {
       if (JSON.parse(body.body).businesses !== undefined){
         res.status(200).json(JSON.parse(body.body).businesses[0]);
@@ -194,7 +193,7 @@ app.get('/users', (req, res) => {
     .then(users => {
       res.status(200).json(users.map(user => {
         return {
-          id: user._id,
+          id: user.id,
           username: user.username,
           email: user.email
         };
@@ -275,7 +274,7 @@ app.put('/users/:id', (req, res) => {
         User
           .findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
           .then(updatedUser => {
-            res.status(204).json({
+            res.status(200).json({
               id: updatedUser.id,
               username: updatedUser.username,
               email: updatedUser.email
@@ -307,12 +306,8 @@ app.use('*', function (req, res) {
   res.status(404).json({ message: 'Not Found' });
 });
 
-// closeServer needs access to a server object, but that only
-// gets created when `runServer` runs, so we declare `server` here
-// and then assign a value to it in run
 let server;
 
-// this function connects to our database, then starts the server
 function runServer(databaseUrl = DATABASE_URL, port = PORT) {
   return new Promise((resolve, reject) => {
     mongoose.connect(databaseUrl, err => {
@@ -331,8 +326,6 @@ function runServer(databaseUrl = DATABASE_URL, port = PORT) {
   });
 }
 
-// this function closes the server, and returns a promise. we'll
-// use it in our integration tests later.
 function closeServer() {
   return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
@@ -348,8 +341,6 @@ function closeServer() {
   });
 }
 
-// if server.js is called directly (aka, with `node server.js`), this block
-// runs. but we also export the runServer command so other code (for instance, test code) can start the server as needed.
 if (require.main === module) {
   runServer().catch(err => console.error(err));
 }
