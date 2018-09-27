@@ -642,12 +642,16 @@ h1 {
 /* -------------------- LIST SECTION--------------------*/
 
 /* -------------------- UNIVERSAL --------------------*/
-footer > p {
+
+footer {
   font-size: 8px;
-  transition: font-size 0.75s ease;
-  margin-left: 7%;
-  background-color: lightgrey;
-  width: 130px;
+  color: grey;
+  transition: color 0.5s ease, transform 0.35s ease;
+}
+
+footer:hover {
+  color: black;
+  transform: scale(1.5);
 }
 
 @media only screen and (max-width: 780px){
