@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title>Planit!</title>
-    <meta name="description" content="A cool capstone project.">
+    <meta name="description" content="Find a home, find an apartment, find a storage unit with Planit today!">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
     <script src="client.js"></script>
   </head>
   <body>
-    <header>
+    <header role="banner">
       <h1>
         Planit
       </h1>
@@ -20,42 +20,42 @@
     </header>
     <main>
       <!-- The Navigation Bar begins here -->
-      <ul id="navBar">
-        <li><a id="homeNav">Home</a></li>
-        <li><a id="contactNav">Contact</a></li>
-        <li><a id="aboutNav">About</a></li>
-        <li id="tripNavButton"><a id="tripNav">My Trip</a></li>
-        <li><a id="userNav">Log in</a></li>
+      <ul id="navBar" role="navigation">
+        <li><a role="button" aria-label="Home Page" id="homeNav">Home</a></li>
+        <li><a role="button" aria-label="Contact Page" id="contactNav">Contact</a></li>
+        <li><a role="button" aria-label="About Page" id="aboutNav">About</a></li>
+        <li id="tripNavButton"><a role="button" aria-label="My Trip Page" id="tripNav">My Trip</a></li>
+        <li><a role="button" aria-label="Log In" id="userNav">Log in</a></li>
       </ul>
       <!-- The Navigation Bar ends here -->
 
       <!-- The Home page begins here -->
       <section id="homePage" class="page">
         <p id="landingText">Let's embark on a journey!</p>
-        <button type="button" id="goToLogin">Yeah!</button>
+        <button role="button" aria-label="Yeah! Let's Go!" type="button" id="goToLogin">Yeah!</button>
       </section>
       <!-- The Home page ends here -->
 
       <!-- The About page begins here -->
       <section id="disclaimerPage" class="page">
-        <form id="disclaimerForm">
-          <p id="disclaimerSubText"> This application uses location information to provide functionality. The data that enables this functionality is provided by entities like Yelp and Google. None of the data that you provide will be used for anything other than serving you here. I, Joshua Stelly, on pain of eternal shame and syntax errors, promise to guard your information. <br> <br>
+        <form aria-label="Disclaimer Form" id="disclaimerForm">
+          <p aria-label="Disclaimer Text" id="disclaimerSubText"> This application uses location information to provide functionality. The data that enables this functionality is provided by entities like Yelp and Google. None of the data that you provide will be used for anything other than serving you here. I, Joshua Stelly, on pain of eternal shame and syntax errors, promise to guard your information. <br> <br>
         </form>
       </section>
       <!-- The About page ends here -->
 
       <!-- The Signup page begins here -->
       <section id="signupPage" class="page">
-        <form id="signupForm">
+        <form aria-label="Signup Form" id="signupForm">
           <label for="userField"></label>
-          <input id="userField" class='input' type="text" name="userField" placeholder="Username" required> <br>
+          <input role="textbox" aria-label="Insert Username" id="userField" class='input' type="text" name="userField" placeholder="Username" required> <br>
           <label for="emailField"></label>
-          <input id="emailField" class="input" type="email" name="emailField" placeholder="Email" required> <br>
+          <input role="textbox" aria-label="Insert Email Address" id="emailField" class="input" type="email" name="emailField" placeholder="Email" required> <br>
           <label for="passField"></label>
-          <input id="passField" class="input" type="password" name="passField" placeholder="Password" required> <br>
+          <input role="textbox" aria-label="Insert Password" id="passField" class="input" type="password" name="passField" placeholder="Password" required> <br>
           <label for="confirmPassField"></label>
-          <input id="confirmPassField" class="input" type="password" name="confirmPassField" placeholder="Confirm Password" required> <br>
-          <button type="submit" id="signupButton">Submit</button>
+          <input role="textbox" aria-label="Confirm Password" id="confirmPassField" class="input" type="password" name="confirmPassField" placeholder="Confirm Password" required> <br>
+          <button role="button" aria-label="Create Account" type="submit" id="signupButton">Create</button>
         </form>
       </section>
       <!-- The Signup page ends here -->
@@ -63,57 +63,57 @@
       <!-- The Signup Success page begins here -->
       <section id="signupSuccessPage" class="page">
         <p id="successText">You have successfully signed up for Planit. <br> </p>
-        <button type="submit" id="returnToLogin">Back to Login</button>
+        <button role="button" aria-label="Return to Login" type="submit" id="returnToLogin">Back to Login</button>
       </section>
       <!-- The Signup Success page ends here -->
 
       <!-- The Login page begins here -->
       <section id="loginPage" class="page">
-        <form id="loginForm">
+        <form aria-label="Login Form" id="loginForm">
           <p> Log in </p> <br>
           <label for="userField"></label>
-          <input id="userField2" class='input' type="text" name="userField" placeholder="Username"> <br>
+          <input role="textbox" aria-label="Insert Username" id="userField2" class='input' type="text" name="userField" placeholder="Username"> <br>
           <label for="passField"></label>
-          <input id="passField2" class="input" type="password" name="passField" placeholder="Password"> <br>
-          <button type="submit" id="login">Login</button>
+          <input role="textbox" aria-label="Insert Password" id="passField2" class="input" type="password" name="passField" placeholder="Password"> <br>
+          <button role="button" aria-label="Submit login details" type="submit" id="login">Login</button>
           <br>
-          <button type="button" id="register">Sign up</button>
+          <button role="button" aria-label="Register for an account." type="button" id="register">Sign up</button>
         </form>
       </section>
       <!-- The Login page ends here -->
 
       <!-- The Setup interface begins here -->
       <section id="locationPage" class="page">
-        <form id="locationForm">
+        <form aria-label="Location Details" id="locationForm">
           <label for="locationField">Where are you now?</label> <br>
-          <input id="locationField" class='input' type="text" name="locationField" placeholder="IE San Diego, CA">
+          <input role="textbox" aria-label="Insert city of origin" id="locationField" class='input' type="text" name="locationField" placeholder="IE San Diego, CA">
           <br>
           <label for="destinationField">Where are you moving to?</label> <br>
-          <input id="destinationField" class="input" type="text" name="destinationField" placeholder="IE Austin, TX">
+          <input role="textbox" aria-label="Insert your destination" id="destinationField" class="input" type="text" name="destinationField" placeholder="IE Austin, TX">
           <br>
-          <button type="button" class="button" id="beginQuestions">Next</button>
+          <button role="button" aria-label="Next" type="button" class="button" id="beginQuestions">Next</button>
           <br>
         </form>
       </section>
 
       <section id="setupPage" class="page">
-        <form id="questionForm">
-          <p id="questionText"> Are you doing a moving thing? </p>
-          <p id="questionSubText"> Planit will help you with a moving thing by doing a robot thing.</p>
-          <button type="button" class="button yesButton" >Yes!</button>
-          <button type="button" class="button noButton" >No.</button>
+        <form aria-label="Yes/No Question Form" id="questionForm">
+          <p aria-label="Question" id="questionText"> Are you doing a moving thing? </p>
+          <p aria-label="Question Details" id="questionSubText"> Planit will help you with a moving thing by doing a robot thing.</p>
+          <button role="button" aria-label="Yes" type="button" class="button yesButton" >Yes!</button>
+          <button role="button" aria-label="No" type="button" class="button noButton" >No.</button>
         </form>
       </section>
       <!-- The Setup interface ends here -->
 
       <!-- The Setup Confirmation interface begins here -->
       <section id="setupConfirmPage" class="page">
-        <form id="questionForm2">
-          <p id="questionText"> Does the list below accurately describe your goals? </p>
-          <p class="tripText">Travelling from <span class="fromCity"></span> to <span class="toCity"></span>.</p>
-          <p id="confirmList"> <ul></ul> </p>
-          <button type="button" class="button confirmButton" >Yup!</button>
-          <button type="button" class="button retryButton" >Nope! (Try Again)</button>
+        <form aria-label="Confirmation Form" id="questionForm2">
+          <p aria-label="Question" id="questionText"> Does the list below accurately describe your goals? </p>
+          <p aria-label="Trip Summary" class="tripText">Travelling from <span class="fromCity"></span> to <span class="toCity"></span>.</p>
+          <p aria-label="Task List" id="confirmList"> <ul></ul> </p>
+          <button role="button" aria-label="Confirm" type="button" class="button confirmButton" >Yup!</button>
+          <button role="button" aria-label="Try Again" type="button" class="button retryButton" >Nope! (Try Again)</button>
         </form>
       </section>
       <!-- The Setup Confirmation interface ends here -->
@@ -121,10 +121,10 @@
       <!-- The List page begins here -->
       <section id="listPage" class="page">
         <p id="tripText">My trip from <span class="fromCity"></span> to <span class="toCity"></span></p>
-        <ul id="moveList">
+        <ul aria-label="List of Moving Tasks" id="moveList">
           <!-- List is constructed here by client.js -->
         </ul>
-        <button type="button" id="restartButton">Restart List</button>
+        <button role="button" aria-label="Restart My List" type="button" id="restartButton">Restart List</button>
       </section>
       <!-- The List page ends here -->
 
@@ -132,7 +132,7 @@
       <section id="contactPage" class="page">
         <p>Developed by Joshua Stelly</p><br>
         <p>If you have any issues, questions, or comments, my contact information is below:</p><br>
-        <p>Email: <a href="mailto:stelldevv@gmail.com">stelldevv@gmail.com</a></p>
+        <p>Email: <a role="link" aria-label="Contact Developer Address" href="mailto:stelldevv@gmail.com">stelldevv@gmail.com</a></p>
         <p>Phone: 225-610-5733</p>
       </section>
       <!-- The Contact page ends here -->

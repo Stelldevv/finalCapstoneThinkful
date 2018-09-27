@@ -279,10 +279,10 @@ function buildList() {
       //Assembles the full-featured list after user approval
         //Creates International Travel Requirements Content
       if (item == 'Review Travel Requirements') {
-        $('#moveList').append('<li>' + '<span class="listItem" id="intTravel">' + item + '</span><button class="toggleBox">+</button><button class="deleteBox">x</button><input type="checkbox" class="checkBox"></input><section class="itemContent"><a href="https://travel.state.gov/content/travel/en/international-travel/before-you-go/travelers-checklist.html" target="_blank">Click here to see requirements at travel.state.gov</a></section></li>');
+        $('#moveList').append('<li>' + '<span class="listItem" id="intTravel">' + item + '</span><button role="button" aria-label="Expand item" class="toggleBox">+</button><button role="button" aria-label="Delete item" class="deleteBox">x</button><input role="checkbox" aria-label="Check off item" type="checkbox" class="checkBox"></input><section class="itemContent"><a role="link" aria-label="Foreign Travel Requirements" href="https://travel.state.gov/content/travel/en/international-travel/before-you-go/travelers-checklist.html" target="_blank">Click here to see requirements at travel.state.gov</a></section></li>');
       
       } else if (item == 'Book a Flight') {
-        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button class="toggleBox">+</button><button class="deleteBox">x</button><input type="checkbox" class="checkBox"></input><section class="itemContent"><div data-skyscanner-widget="SearchWidget"></div><script src="https://widgets.skyscanner.net/widget-server/js/loader.js" async></script></section></li>');
+        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button role="button" aria-label="Expand item" class="toggleBox">+</button><button role="button" aria-label="Delete item" class="deleteBox">x</button><input role="checkbox" aria-label="Check off item" type="checkbox" class="checkBox"></input><section class="itemContent"><div role="tab" aria-label="Search for flight" data-skyscanner-widget="SearchWidget"></div><script src="https://widgets.skyscanner.net/widget-server/js/loader.js" async></script></section></li>');
       
       } else if (item == 'Ship your Vehicle') {
         service = 'vehicle shipping';
@@ -293,7 +293,7 @@ function buildList() {
           $('#yelpVShip').html('<span class="bestOnYelp">Best on Yelp</span><br>' + result.name + '<br>(' + result.rating + '/5 rating, ' + result.review_count + ' reviews)');
           $('#yelpVShip2').attr('src', 'https://www.google.com/maps/embed/v1/place?q=' + yelpMap + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s')
         })
-        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button class="toggleBox">+</button><button class="deleteBox">x</button><input type="checkbox" class="checkBox"></input><section class="itemContent"><section id="yelpVShip" class="yelpResult"></section><iframe id="yelpVShip2" width="150" height="150" frameborder="1" style="border:2" src=""></iframe><br><span class="clickSnip">Click map for details!</span></section></li>');
+        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button role="button" aria-label="Expand item" class="toggleBox">+</button><button role="button" aria-label="Delete item" class="deleteBox">x</button><input role="checkbox" aria-label="Check off item" type="checkbox" class="checkBox"></input><section class="itemContent"><section role="dialog" aria-label="Best Yelp Result" id="yelpVShip" class="yelpResult"></section><iframe role="tab" aria-label="Google Maps Location" id="yelpVShip2" width="150" height="150" frameborder="1" style="border:2" src=""></iframe><br><span class="clickSnip">Click map for details!</span></section></li>');
       
       } else if (item == 'Find a Storage Unit') {
         service = 'storage unit';
@@ -304,7 +304,7 @@ function buildList() {
           $('#yelpStorage').html('<span class="bestOnYelp">Best on Yelp</span><br>' + result.name + '<br>(' + result.rating + '/5 rating, ' + result.review_count + ' reviews)');
           $('#yelpStorage2').attr('src', 'https://www.google.com/maps/embed/v1/place?q=' + yelpMap + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s')
         })
-        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button class="toggleBox">+</button><button class="deleteBox">x</button><input type="checkbox" class="checkBox"></input><section class="itemContent"><section id="yelpStorage" class="yelpResult"></section><iframe id="yelpStorage2" width="150" height="150" frameborder="1" style="border:2" src=""></iframe><br><span class="clickSnip">Click map for details!</span></section></li>');
+        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button role="button" aria-label="Expand item" class="toggleBox">+</button><button role="button" aria-label="Delete item" class="deleteBox">x</button><input role="checkbox" aria-label="Check off item" type="checkbox" class="checkBox"></input><section class="itemContent"><section role="dialog" aria-label="Best Yelp Result" id="yelpStorage" class="yelpResult"></section><iframe role="tab" aria-label="Google Maps Location" id="yelpStorage2" width="150" height="150" frameborder="1" style="border:2" src=""></iframe><br><span class="clickSnip">Click map for details!</span></section></li>');
       
       } else if (item == 'Hire Movers') {
         service = 'movers';
@@ -315,7 +315,7 @@ function buildList() {
           $('#yelpMovers').html('<span class="bestOnYelp">Best on Yelp</span><br>' + result.name + '<br>(' + result.rating + '/5 rating, ' + result.review_count + ' reviews)');
           $('#yelpMovers2').attr('src', 'https://www.google.com/maps/embed/v1/place?q=' + yelpMap + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s')
         })
-        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button class="toggleBox">+</button><button class="deleteBox">x</button><input type="checkbox" class="checkBox"></input><section class="itemContent"><section id="yelpMovers" class="yelpResult"></section><iframe id="yelpMovers2" width="150" height="150" frameborder="1" style="border:2" src=""></iframe><br><span class="clickSnip">Click map for details!</span></section></li>');        
+        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button role="button" aria-label="Expand item" class="toggleBox">+</button><button role="button" aria-label="Delete item" class="deleteBox">x</button><input role="checkbox" aria-label="Check off item" type="checkbox" class="checkBox"></input><section class="itemContent"><section role="dialog" aria-label="Best Yelp Result" id="yelpMovers" class="yelpResult"></section><iframe role="tab" aria-label="Google Maps Location" id="yelpMovers2" width="150" height="150" frameborder="1" style="border:2" src=""></iframe><br><span class="clickSnip">Click map for details!</span></section></li>');        
       
       } else if (item == 'Rent a Moving Truck') {
         service = 'moving truck rental';
@@ -326,20 +326,20 @@ function buildList() {
           $('#yelpTruck').html('<span class="bestOnYelp">Best on Yelp</span><br>' + result.name + '<br>(' + result.rating + '/5 rating, ' + result.review_count + ' reviews)');
           $('#yelpTruck2').attr('src', 'https://www.google.com/maps/embed/v1/place?q=' + yelpMap + '&key=AIzaSyCpG8rWBDb4xfvviR1-Y7yr7pIt3bulT0s')
         })
-        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button class="toggleBox">+</button><button class="deleteBox">x</button><input type="checkbox" class="checkBox"></input><section class="itemContent"><section id="yelpTruck" class="yelpResult"></section><iframe id="yelpTruck2" width="150" height="150" frameborder="1" style="border:2" src=""></iframe><br><span class="clickSnip">Click map for details!</span></section></li>');
+        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button role="button" aria-label="Expand item" class="toggleBox">+</button><button role="button" aria-label="Delete item" class="deleteBox">x</button><input role="checkbox" aria-label="Check off item" type="checkbox" class="checkBox"></input><section class="itemContent"><section role="dialog" aria-label="Best Yelp Result" id="yelpTruck" class="yelpResult"></section><iframe role="tab" aria-label="Google Maps Location" id="yelpTruck2" width="150" height="150" frameborder="1" style="border:2" src=""></iframe><br><span class="clickSnip">Click map for details!</span></section></li>');
       
       } else if (item == 'Find a Home to Purchase') {
-        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button class="toggleBox">+</button><button class="deleteBox">x</button><input type="checkbox" class="checkBox"></input><section class="itemContent"><a href="https://www.zillow.com/homes/for_sale/' + toCity + '/" target="_blank">Zillow.com - ' + toCity + ' Homes for Sale</a></section></li>')
+        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button role="button" aria-label="Expand item" class="toggleBox">+</button><button role="button" aria-label="Delete item" class="deleteBox">x</button><input role="checkbox" aria-label="Check off item" type="checkbox" class="checkBox"></input><section class="itemContent"><a role="link" aria-label="Homes for sale on Zillow.com" href="https://www.zillow.com/homes/for_sale/' + toCity + '/" target="_blank">Zillow.com - ' + toCity + ' Homes for Sale</a></section></li>')
       
       } else if (item == 'Find Rental Housing') {
-        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button class="toggleBox">+</button><button class="deleteBox">x</button><input type="checkbox" class="checkBox"></input><section class="itemContent"><a href="https://www.zillow.com/homes/for_rent/' + toCity + '/" target="_blank">Zillow.com - ' + toCity + ' Rentals</a><br><a href="https://www.apartments.com/' + toCity + '/" target="_blank">Apartments.com - ' + toCity + ' Rentals</a></section></li>');
+        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button role="button" aria-label="Expand item" class="toggleBox">+</button><button role="button" aria-label="Delete item" class="deleteBox">x</button><input role="checkbox" aria-label="Check off item" type="checkbox" class="checkBox"></input><section class="itemContent"><a role="link" aria-label="Homes for rent on Zillow.com" href="https://www.zillow.com/homes/for_rent/' + toCity + '/" target="_blank">Zillow.com - ' + toCity + ' Rentals</a><br><a role="link" aria-label="Homes for rent on Apartments.com" href="https://www.apartments.com/' + toCity + '/" target="_blank">Apartments.com - ' + toCity + ' Rentals</a></section></li>');
       
       } else if (item == 'Setup Email Reminders'){
         //$('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button class="toggleBox">+</button><input type="checkbox" class="checkBox"></input><section class="itemContent"><p>Date: <input type="date" id="datepicker"></p></section></li>');
-        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button class="toggleBox">+</button><button class="deleteBox">x</button><input type="checkbox" class="checkBox"></input><section class="itemContent"><p>[Feature to be implemented in later version]</p></section></li>');
+        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button role="button" aria-label="Expand item" class="toggleBox">+</button><button role="button" aria-label="Delete item" class="deleteBox">x</button><input role="button" aria-label="Check off item" type="checkbox" class="checkBox"></input><section class="itemContent"><p role="dialog" aria-label="Feature disabled - will be enabled in future version" >[Feature to be implemented in later version]</p></section></li>');
       
       } else {
-        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button class="toggleBox">+</button><button class="deleteBox">x</button><input type="checkbox" class="checkBox"></input><section class="itemContent"></section></li>');
+        $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button role="button" aria-label="Expand item" class="toggleBox">+</button><button role="button" aria-label="Delete item" class="deleteBox">x</button><input role="button" aria-label="Check off item" type="checkbox" class="checkBox"></input><section class="itemContent"></section></li>');
       }
     });
 }
