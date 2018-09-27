@@ -22,7 +22,7 @@ Guide:
 
 When you're ready to embark on your Planit journey, press the "Yeah!" button to begin.
 
-Note: User is permitted to audibly shout "Yeah!" as they press the button. May or may not assist in content rendering. It's better to play it safe.
+Note: User is permitted to audibly shout "Yeah!" as they press the button. May or may not assist in content rendering, but it's generally better to play it safe.
 
 ![Home Page](/screenshots/PlanDoc1.png?raw=true "Home Page")
 
