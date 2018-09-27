@@ -377,6 +377,7 @@ h1 {
   margin-bottom: 5px;
   text-align: center;
   font-size: 20px;
+  font-weight: bold;
 }
 
 .tripText {
@@ -386,9 +387,10 @@ h1 {
 }
 
 #questionSubText, #disclaimerSubText {
-  color: grey;
+  color: black;
   width: 80%;
   margin: auto;
+  margin-top: 10px;
   margin-bottom: 10px;
   font-size: 14px;
 }
@@ -410,7 +412,7 @@ h1 {
 /* ----------------- SETUP CONFIRMATION SECTION -----------------*/
 #confirmList {
   margin-top: 15px;
-  color: rgb(138, 106, 27);
+  color: black;
 }
 
 #confirmList li {
@@ -424,7 +426,8 @@ h1 {
 }
 
 .fromCity, .toCity {
-  color: blue;
+  color: darkblue;
+  text-decoration: underline;
 }
 
 .confirmButton {
@@ -502,9 +505,10 @@ h1 {
   width: 250px;
   height: auto;
   text-align: center;
-  background-color: rgba(147, 148, 150, 0.8);
-  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
   border-radius: 6px;
+  font-weight: bold;
 }
 
 .itemContent {
@@ -531,7 +535,7 @@ h1 {
 
 .bestOnYelp {
   display: inline-block;
-  color: gold;
+  color: darkblue;
   background-color: lemonchiffon;
   margin: auto;
   margin-bottom: 5px;
@@ -558,7 +562,7 @@ h1 {
   bottom: 5px;
   float: left;
   border: 1px solid grey;
-  background-color: darkgrey;
+  background-color: grey;
   border-radius: 4px;
   height: 20px;
   width: 20px;
