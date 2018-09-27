@@ -48,7 +48,6 @@ function navbar () {
     $('#tripNavButton').css('display', 'none');
     $('#userNav').text('Log In');
   })
-
 }
 
 function landingPage() {
@@ -63,7 +62,6 @@ function landingPage() {
     $('.page').css('display', 'none');
     $('#loginPage').css('display', 'block');
     });
-
 };
 
 function login() {
@@ -117,7 +115,6 @@ function login() {
         $('.page').css('display', 'none');
         $('#signupPage').css('display', 'block');
       });
-
   };
 
 function returnToLogin () {
@@ -127,7 +124,6 @@ function returnToLogin () {
         $('#loginPage').css('display', 'block');
         clearFormData();
       });
-
 };
 
 function registerUser () {
@@ -175,7 +171,6 @@ function registerUser () {
       clearFormData();
     }
   })
-
 };
 
 function generateQuestion () {
@@ -187,7 +182,6 @@ function generateQuestion () {
       } else if (state.currentQuestionIndex >= state.questions.length) {
         createList();
       }
-
 };
 
 function beginSetup() {
@@ -208,7 +202,6 @@ function beginSetup() {
             //add alert: fill in both fields here
           }
       });
-
 };
 
 function listMaker () {
@@ -226,7 +219,6 @@ function listMaker () {
         state.currentQuestionIndex++;
         generateQuestion();
     });
-
 };
 
 function createList () {
@@ -276,7 +268,6 @@ function createList () {
     $('.page').css('display', 'none');
     $('#locationPage').css('display', 'block');
   });
-
 };
 
 function buildList() {
@@ -349,7 +340,6 @@ function buildList() {
       
       } else {
         $('#moveList').append('<li>' + '<span class="listItem">' + item + '</span><button class="toggleBox">+</button><button class="deleteBox">x</button><input type="checkbox" class="checkBox"></input><section class="itemContent"></section></li>');
-      
       }
     });
 }
@@ -403,7 +393,6 @@ function moveList() {
     generateQuestion();
     $('#locationPage').css('display', 'block');
   });
-
 };
 
 function resetList() {
@@ -430,7 +419,6 @@ function clearFormData() {
   $('#passField2').val('');
   status = '';
   message = '';
-
 };
 
 function load() {
@@ -443,7 +431,6 @@ function load() {
   beginSetup();
   listMaker();
   moveList();
-
 };
 
 $(load);

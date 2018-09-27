@@ -4,6 +4,6 @@ deploy:
   provider: heroku
   api_key:
     secure: X5WSUDOEnkS3SflhDqvlPLhf++XkyHi+qU/fPvimO+gjD/+M3NR+K57e8Z7sC0qmAJNyHL/s92/VRdtCz1jLMmkEZdKibsaYG0JvUPaYyAnyyB+Va1g0Vspyc9BoyECrm4qvROSJ9GkkGHWTk4aPvlW3oXA2Xfl33iHqvH3byW88WuVlia0DTWmfdYg2fRUTrcr2lwoEyAKwIS4PWEFvEYn+G8GAWtyyNOCT9NNc2/2cW6vgbEJmgGCwRQFctQ62hPpS2uwohlV1B+ABwP7el422z9AVd+GJAPElLci+va/ALxhaAvu/htHkart4zRCZMMu6TuuCAlNKFQrP7+Lck6RjMmDajCWB897PxwqxIO71tfLVpQ11qkWawyssHVQZJK5eDBTU9oEn9B06lu1Mpr47SCPc+l59UXN9w0S+UA33GKdE4EowPN9AaQb/O7Y6QCdRTVlv+2Nngs060sOZACgbuC6eWrjhHVmrfjAfe6/y6oE5WYV6MQgCnDvYr1vXL7cnXjpVRzAKJGS60DnNPYd89GvqT11116zyUQK9dQNW0xc+PDggYC2rTz6w4D3988c5tAHXUCFBdRLwq/v89lwj4M8ZDHVhC3htRKl4ppo2eUYxVpNiG2X6Kx+Fiz48zluiEq4vE0xR9pybThUuvy9IOnN83+YOTI1RAUYd+C4=
-  app: calm-hollows-72370
+  app: finalCapstoneThinkful
   on:
     repo: Stelldevv/finalCapstoneThinkful

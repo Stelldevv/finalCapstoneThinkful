@@ -25,6 +25,25 @@ function callback(error, response, body) {
   }
 }
 
+app.get('/yelp/:city/:service', (req, res) => {
+  var options = {
+      url: 'https://api.yelp.com/v3/businesses/search?{service}&{location}&sortby=review_count',
+      headers: {
+        'Authorization': 'Bearer gxzAI1gpNgnHmS-yFroH633b3LmnU31Uxe8xDxMuxIpM5O9E16zEC1EIUwGD-IAQF1UhI223FGhtixLsiBIUMsNNaTgoczcaRZu9LJ6EEZZYsc1Mpwoafp4dmxB2W3Yx'
+      }
+  }
+    let city = "location=".concat(req.params.city);
+    let service = "term=".concat(req.params.service);
+    options.url = options.url.replace("{service}&{location}", service + '&' + city);
+    request.get(options, (error, body, response) => {
+      if (JSON.parse(body.body).businesses !== undefined){
+        res.status(200).json(JSON.parse(body.body).businesses[0]);
+      } else {
+        res.status(204).json("Result not found");
+      }
+  })
+})
+
 app.get('/login/:username/:password', (req, res) => {
 	var status;
   User
@@ -164,26 +183,6 @@ app.delete('/trips/:id', (req, res) => {
       res.status(500).json({ error: 'something went terribly wrong' });
     });
 });
-
-app.get('/yelp/:city/:service', (req, res) => {
-	var options = {
-  		url: 'https://api.yelp.com/v3/businesses/search?{service}&{location}&sortby=review_count',
-  		headers: {
-    		'Authorization': 'Bearer gxzAI1gpNgnHmS-yFroH633b3LmnU31Uxe8xDxMuxIpM5O9E16zEC1EIUwGD-IAQF1UhI223FGhtixLsiBIUMsNNaTgoczcaRZu9LJ6EEZZYsc1Mpwoafp4dmxB2W3Yx'
-  		}
-	}
-
-		let city = "location=".concat(req.params.city);
-		let service = "term=".concat(req.params.service);
-		options.url = options.url.replace("{service}&{location}", service + '&' + city);
-		request.get(options, (error, body, response) => {
-      if (JSON.parse(body.body).businesses !== undefined){
-        res.status(200).json(JSON.parse(body.body).businesses[0]);
-      } else {
-        res.status(204).json("Result not found");
-      }
-	})
-})
 
 app.get('/users', (req, res) => {
   User
