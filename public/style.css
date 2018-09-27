@@ -164,11 +164,12 @@ html {
 
 /* -------------------- HOME PAGE SECTION --------------------*/
 #homePage {
+  position: relative;
+  top: 110px;
   background-color: rgba(193, 66, 66, 0.85);
   border: 1px solid white;
   border-radius: 6px;
   margin: auto;
-  margin-top: 12%;
   padding: 20px;
   width: 50%;
   max-width: 475px;
@@ -177,9 +178,10 @@ html {
 
 #landingText {
   font-weight: bold;
-  font-size: 35px;
+  font-size: 30px;
+  text-decoration: underline;
   margin: auto;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   padding: 5px;
 }
 
@@ -188,26 +190,39 @@ html {
   border-radius: 5px;
   border: 1px solid black;
   padding: 8px;
-  transition: background-color 0.55s ease, transform 1s ease;
+  transition: background-color 0.55s ease, transform 0.5s cubic-bezier(0.080, -0.950, 0.265, 1.850);
   background-color: blue;
   width: 90px;
   height: 45px;
 }
 
 #goToLogin:hover {
-  transform: scale(1.25, 1.25);
+  transform: scale(1.35, 1.35);
   background-color: coral;
+}
+
+#explainText {
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+#homeQuest {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: bold;
 }
 /* -------------------- HOME PAGE SECTION --------------------*/
 
 /* -------------------- CONTACT SECTION --------------------*/
 #contactPage {
+  position: relative;
+  top: 110px;
   width: 30%;
   text-align: center;
   margin: auto;
   padding: 10px;
   background-color: aliceblue;
-  border: 1px solid grey;
+  border: 2px ridge grey;
   border-radius: 4px;
 }
 
@@ -218,6 +233,8 @@ html {
 
 /* -------------------- SIGNUP SECTION --------------------*/
 #signupForm {
+  position: relative;
+  top: 110px;
   width: 50%;
   max-width: 475px;
   margin: auto;
@@ -313,8 +330,9 @@ h1 {
   background-color: royalblue;
   padding-bottom: 10px;
 }
-
 #loginForm {
+  position: relative;
+  top: 110px;
   padding: 10px;
   background-color: cornflowerblue;
   border-radius: 4px;
@@ -327,7 +345,7 @@ h1 {
   margin-top: 30px;
   margin-bottom: 30px;
   width: 50%;
-  max-width: 475px;
+  max-width: 250px;
   text-align: center;
 }
 
@@ -358,6 +376,11 @@ h1 {
 /* ----------------- SETUP/DISCLAIMER SECTION -----------------*/
 #disclaimerSubText {
   margin-top: 20px !important;
+}
+
+#disclaimerForm {
+  position: relative;
+  top: 110px;
 }
 
 #questionForm, #questionForm2, #disclaimerForm, #locationForm {
@@ -642,19 +665,26 @@ h1 {
 /* -------------------- LIST SECTION--------------------*/
 
 /* -------------------- UNIVERSAL --------------------*/
-
 footer {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  display: inline-block;
   font-size: 8px;
-  color: grey;
+  border: 1px solid black;
+  border-radius: 2px;
+  background-color: rgba(100,100,100,0.9);
+  color: black;
   transition: color 0.5s ease, transform 0.35s ease;
 }
 
-footer:hover {
-  color: black;
-  transform: scale(1.5);
-}
-
 @media only screen and (max-width: 780px){
+  #landingText{
+    font-size: 20px;
+  }
+  #explainText{
+    font-size: 15px;
+  }
   #moveList > li {
     width: 100%;
     font-size: 14px;
@@ -687,7 +717,10 @@ footer:hover {
 
 @media only screen and (max-width: 560px){
   #landingText {
-    font-size: 20px;
+    font-size: 15px;
+  }
+  #explainText {
+    font-size: 12px;
   }
   #moveList{
     width: 80%
@@ -736,6 +769,37 @@ footer:hover {
   }
 }
 
+@media only screen and (max-width: 320px){
+  #navBar > li a {
+    padding: 10px 6px;
+    font-size: 10px;
+  }
+  #disclaimerSubText {
+    font-size: 10px;
+  }
+  #landingText {
+    font-size: 15px;
+    text-decoration: none;
+  }
+  #explainText {
+    font-size: 10px;
+  }
+  #goToLogin{
+    transform: scale(0.8);
+  }
+  form > input {
+    width: 85%;
+  }
+  #moveList > li {
+    position: relative;
+    right: 20px;
+    width: 120%;
+    font-size: 10px;
+  }
+  #moveList li a {
+    font-size: 10px;
+  }
+}
 /* ------- HIDE PAGES TO SIMULATE FLOW ------- */
 #signupPage, #disclaimerPage, #signupSuccessPage, #locationPage, #setupConfirmPage, #listPage, #waitingRoom, #contactPage {
   display: none;
