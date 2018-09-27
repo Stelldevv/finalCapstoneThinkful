@@ -289,6 +289,10 @@ html {
 
 /* -------------------- LOGIN SECTION --------------------*/
 h1 {
+  background: url(images/starSky.jpg) no-repeat center center fixed; 
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
   font-weight: bold;
   color: white;
   display: block;
@@ -299,6 +303,10 @@ h1 {
 }
 
 #slogan {
+  background: url(images/starSky.jpg) no-repeat center center fixed; 
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
   font-size: 12px;
   text-align: center;
   color: white;
