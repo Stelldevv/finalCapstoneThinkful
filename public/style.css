@@ -461,13 +461,9 @@ h1 {
 }
 
 #moveList {
-  background: url(images/clickBoard.jpg) no-repeat center center fixed; 
-  background-size: cover;
-  height: 100%;
-  overflow: hidden;
   border: 2px ridge grey;
   border-radius: 6px;
-  background-color:white;
+  background-color: rgba(255, 255, 255, 0.8);
   width: 60%;
   max-width: 550px;
   margin: auto;
