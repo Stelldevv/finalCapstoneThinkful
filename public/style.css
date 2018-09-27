@@ -295,14 +295,14 @@ h1 {
   text-align: center;
   padding: 20px 0px 10px 0px;
   height: 50px;
-  background-color: cornflowerblue;
+  background-color: royalblue;
 }
 
 #slogan {
   font-size: 12px;
   text-align: center;
-  color: black;
-  background-color: cornflowerblue;
+  color: white;
+  background-color: royalblue;
   padding-bottom: 10px;
 }
 
@@ -448,7 +448,7 @@ h1 {
 }
 
 #moveList {
-  background: url(images/clickboard.jpg) no-repeat center center fixed; 
+  background: url(images/clickBoard.jpg) no-repeat center center fixed; 
   background-size: cover;
   height: 100%;
   overflow: hidden;
