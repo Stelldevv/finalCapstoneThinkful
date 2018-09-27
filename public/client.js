@@ -79,7 +79,7 @@ function login() {
             LOAD_TRIP_URL = 'https://calm-hollows-72370.herokuapp.com/trips/' + ACTIVE_USER;
             $.getJSON(LOAD_TRIP_URL, function(response) {
               if (response !== 'not found') {
-                alert("Welcome to Planit!");
+                alert("Welcome back to Planit!");
                 TRIP_DATA = response;
                 list = TRIP_DATA.list;
                 fromCity = TRIP_DATA.location;
@@ -94,17 +94,18 @@ function login() {
                 $('.page').css('display', 'none');
                 $('#listPage').css('display', 'block');
               } else {
-              clearFormData();
-              $('#userNav').text('Log Out');
-              $('.page').css('display', 'none');
-              $('#locationPage').css('display', 'block');
+                alert("Thanks for signing up! Please take a moment to answer some questions.")
+                clearFormData();
+                $('#userNav').text('Log Out');
+                $('.page').css('display', 'none');
+                $('#locationPage').css('display', 'block');
               }
             })
           } else if (status == "Failure") {
-            alert("Login Failed: Try Again!");
+            alert("Login Failed");
             clearFormData();
           } else {
-            alert("User not found");
+            alert("Login Failed");
             clearFormData();
           }
         })
