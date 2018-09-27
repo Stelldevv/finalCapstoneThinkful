@@ -25,6 +25,7 @@ function callback(error, response, body) {
   }
 }
 
+//Endpoint for Yelp query
 app.get('/yelp/:city/:service', (req, res) => {
   var options = {
       url: 'https://api.yelp.com/v3/businesses/search?{service}&{location}&sortby=review_count',
@@ -44,6 +45,7 @@ app.get('/yelp/:city/:service', (req, res) => {
   })
 })
 
+//Endpoint for user logins
 app.get('/login/:username/:password', (req, res) => {
 	var status;
   User
@@ -67,6 +69,7 @@ app.get('/login/:username/:password', (req, res) => {
     });
 });
 
+//Endpoint to list all trips on server
 app.get('/trips', (req, res) => {
   Trip
     .find()
@@ -87,6 +90,7 @@ app.get('/trips', (req, res) => {
     });
 });
 
+//Endpoint to list all trips for a given user
 app.get('/trips/:username', (req, res) => {
   Trip
     .findOne({ username: req.params.username })
@@ -105,6 +109,7 @@ app.get('/trips/:username', (req, res) => {
     });
 });
 
+//Endpoint to add trip to database
 app.post('/trips', (req, res) => {
 	const requiredFields = ['list', 'username', 'location', 'destination'];
   requiredFields.forEach(field => {
@@ -135,6 +140,7 @@ app.post('/trips', (req, res) => {
     });
 })
 
+//Endpoint for updating trips
 app.put('/trips/:id', (req, res) => {
   if (!(req.params.id && req.body.id === req.body.id)) {
     res.status(400).json({
@@ -167,6 +173,7 @@ app.put('/trips/:id', (req, res) => {
     });
 });
 
+//Endpoint for deleting trips
 app.delete('/trips/:id', (req, res) => {
   Trip
     .remove({ trip: req.params.id })
@@ -184,6 +191,7 @@ app.delete('/trips/:id', (req, res) => {
     });
 });
 
+//Endpoint for listing users (excluding passwords)
 app.get('/users', (req, res) => {
   User
     .find()
@@ -202,6 +210,7 @@ app.get('/users', (req, res) => {
     });
 });
 
+//Endpoint for registering a user with the server
 app.post('/users', (req, res) => {
   const requiredFields = ['username', 'email', 'password'];
   requiredFields.forEach(field => {
@@ -244,6 +253,7 @@ app.post('/users', (req, res) => {
     });
 });
 
+//Endpoint for updating user data
 app.put('/users/:id', (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
@@ -282,6 +292,7 @@ app.put('/users/:id', (req, res) => {
     });
 });
 
+//Endpoint for deleting a user from the database
 app.delete('/users/:id', (req, res) => {
   User
     .remove({ user: req.params.id })
